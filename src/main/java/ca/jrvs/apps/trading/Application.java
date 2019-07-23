@@ -1,4 +1,4 @@
-package ca.jrvs.apps.trading.util;
+package ca.jrvs.apps.trading;
 
 import ca.jrvs.apps.trading.service.QuoteService;
 import org.slf4j.Logger;
@@ -20,13 +20,13 @@ import java.util.Arrays;
  */
 @SpringBootApplication(exclude = {JdbcTemplateAutoConfiguration.class, DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class Application implements CommandLineRunner {
-private Logger logger = LoggerFactory.getLogger(Application.class);
-@Autowired
-private DataSource dataSource;
-@Value("aapl, msft, amzn, fb")
-private String[] initDailyList;
-//@Autowired
-private QuoteService quoteService;
+    private Logger logger = LoggerFactory.getLogger(Application.class);
+    @Autowired
+    private DataSource dataSource;
+    @Value("aapl, msft, amzn, fb")
+    private String[] initDailyList;
+    @Autowired
+    private QuoteService quoteService;
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Application.class);

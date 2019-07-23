@@ -35,7 +35,6 @@ public class MarketDataDao {
         this.httpClientConnectionManager = httpClientConnectionManager;
         BATCH_QUOTE_URL = marketDataConfig.getHost() + "/stock/market/batch?symbols=%s&types=quote&token="
                 + marketDataConfig.getToken();
-        ;
     }
 
     /**

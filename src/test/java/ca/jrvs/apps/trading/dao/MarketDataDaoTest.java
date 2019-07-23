@@ -11,14 +11,14 @@ public class MarketDataDaoTest {
     HttpClientConnectionManager httpClientConnectionManager = new PoolingHttpClientConnectionManager();
     MarketDataConfig marketDataConfig;
 
-    MarketDataDao marketDataDao ;
+    MarketDataDao marketDataDao;
 
     @Test
     public void findIexQuoteByTicker() {
         marketDataConfig = new MarketDataConfig();
-        marketDataConfig.setHost("https://cloud.iexapis.com");
+        marketDataConfig.setHost("https://api.iextrading.com/1.0/tops");
         marketDataConfig.setToken("pk_02baaf19c0e9412d937bbe5b063640f1");
-        marketDataDao = new MarketDataDao(httpClientConnectionManager,marketDataConfig);
+        marketDataDao = new MarketDataDao(httpClientConnectionManager, marketDataConfig);
         try {
             //IexQuote aapl = marketDataDao.findIexQuoteByTickers("AAPL");
             //String s = aapl.toString();
@@ -30,6 +30,7 @@ public class MarketDataDaoTest {
     }
 
     @Test
-    public void findIexQuoteByTicker1() {
+    public void findIexQuoteByTickers() {
     }
+
 }

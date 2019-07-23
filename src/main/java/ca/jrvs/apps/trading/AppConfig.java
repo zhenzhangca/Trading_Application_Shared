@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 public class AppConfig {
 
     private Logger logger = LoggerFactory.getLogger(AppConfig.class);
-
+    //Can hard code this for now or use env_var
     @Value("${iex.host}")
     private String iex_host;
 
@@ -47,21 +47,22 @@ public class AppConfig {
         String jdbcUrl;
         String user;
         String password;
-        if(!StringUtil.isEmpty(System.getenv("RDBMS_HOSTNAME"))){
-            logger.info("RDBMS_HOSTNAME: "+System.getenv("RDBMS_HOSTNAME"));
-            logger.info("RDBMS_USERNAME: "+System.getenv("RDBMS_USERNAME"));
-            logger.info("RDBMS_PASSWORD: "+System.getenv("RDBMS_PASSWORD"));
-//            ???
-            jdbcUrl = "jdbc:postgresql://" +System.getenv("RDBMS_HOSTNAME")+":"+System.getenv("PORT?")+"/jrvstradding";
-            user = System.getenv("RDBMS_USERNAME");
-            password = System.getenv("RDBMS_PASSWORD");
-        }else{
+
+//        if(!StringUtil.isEmpty(System.getenv("RDBMS_HOSTNAME"))){
+//            logger.info("RDBMS_HOSTNAME: "+System.getenv("RDBMS_HOSTNAME"));
+//            logger.info("RDBMS_USERNAME: "+System.getenv("RDBMS_USERNAME"));
+//            logger.info("RDBMS_PASSWORD: "+System.getenv("RDBMS_PASSWORD"));
+////            ???
+//            jdbcUrl = "jdbc:postgresql://" +System.getenv("RDBMS_HOSTNAME")+":"+System.getenv("PORT?")+"/jrvstradding";
+//            user = System.getenv("RDBMS_USERNAME");
+//            password = System.getenv("RDBMS_PASSWORD");
+//        }else{
             jdbcUrl = System.getenv("PSQL_URL");
             user = System.getenv("PSQL_USER");
             password = System.getenv("PSQL_PASSWORD");
 
 
-        }
+//        }
         logger.info("JDBC: "+jdbcUrl);
         if(StringUtil.isEmpty(jdbcUrl, user, password)){
             throw new IllegalArgumentException("Missing datasource config env vars");

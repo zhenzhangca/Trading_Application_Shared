@@ -3,6 +3,8 @@ package ca.jrvs.apps.trading.dao;
 import ca.jrvs.apps.trading.model.domain.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -11,11 +13,11 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 public abstract class JdbcCrudDao<E extends Entity, ID> implements CrudRepository<E, ID> {
     private static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
 
-    abstract public JdbcTemplate getJdvcTemplate();
+    abstract public JdbcTemplate getJdbcTemplate();
 
     abstract public SimpleJdbcInsert getSimpleJdbcInsert();
 
-    abstract public String getTalbeName();
+    abstract public String getTableName();
 
     abstract public String getIdName();
 
@@ -34,32 +36,70 @@ public abstract class JdbcCrudDao<E extends Entity, ID> implements CrudRepositor
     public E findById(ID id) {
         return findById(getIdName(), id, false, getEntityClass());
     }
-    public E findByIdForUpdate(ID id){
+
+    public E findByIdForUpdate(ID id) {
         return findById(getIdName(), id, true, getEntityClass());
     }
 
-    //Helper method
+    /**
+     * @return an entity
+     * @throws java.sql.SQLException     if sql execution failed
+     * @throws ResourceNotFoundException if no entity is found in db
+     */
+    @SuppressWarnings("unchecked")
     public E findById(String idName, ID id, boolean forUpdate, Class clazz) {
-        return null;
+        E t = null;
+        String selectSql = "SELECT * FROM " + getTableName() + " WHERE " + idName + " =?";
+
+        //Advanced: handle read + update race condition
+        if (forUpdate) {
+            selectSql += " for update";
+        }
+        logger.info(selectSql);
+
+        try {
+            t = (E) getJdbcTemplate()
+                    .queryForObject(selectSql,
+                            BeanPropertyRowMapper.newInstance(clazz), id);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("Can't find trader id:" + id, e);
+        }
+        if (t == null) {
+            throw new ResourceNotFoundException("Resource not found");
+        }
+        return t;
     }
 
     @Override
     public boolean existsById(ID id) {
-        return false;
+        return existsById(getIdName(), id);
     }
 
     //Helper method
-    public boolean existsByid(String idName, ID id) {
-        return false;
+    public boolean existsById(String idName, ID id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID can't be null");
+        }
+        String selectSql = "SELECT count(*) FROM " + getTableName() + " WHERE " + idName + " =?";
+        logger.info(selectSql);
+        Integer count = getJdbcTemplate()
+                .queryForObject(selectSql,
+                        Integer.class, id);
+        return count != 0;
     }
 
     @Override
     public void deleteById(ID id) {
-
+        deleteById(getIdName(), id);
     }
 
     //Helper method
-    public void deleteByid(String idName, ID id) {
-
+    public void deleteById(String idName, ID id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID can't be null");
+        }
+        String deleteSql = "DELETE FROM " + getTableName() + " WHERE " + idName + " =?";
+        logger.info(deleteSql);
+        getJdbcTemplate().update(deleteSql, id);
     }
 }
