@@ -102,11 +102,15 @@ public class MarketDataDao {
         }
     }
 
-    private CloseableHttpClient getHttpClient() {
+    protected CloseableHttpClient getHttpClient() {
         HttpClientBuilder httpClientBuilder = HttpClients.custom().setConnectionManager(httpClientConnectionManager);
         //Prevent connectionManager shutdown when calling httpClient.close()
         httpClientBuilder.setConnectionManagerShared(true);
         CloseableHttpClient httpClient = httpClientBuilder.build();
         return httpClient;
+    }
+
+    public String getBATCH_QUOTE_URL() {
+        return BATCH_QUOTE_URL;
     }
 }

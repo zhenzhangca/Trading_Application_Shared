@@ -48,8 +48,13 @@ public class AccountDao extends JdbcCrudDao<Account, Integer> {
     }
 
     @Override
-    Class getEntityClass() {
+    public Class getEntityClass() {
         return Account.class;
+    }
+
+    @Override
+    public Account save(Account account){
+        return super.save(account);
     }
 
     public Account findByTraderId(Integer traderId) {
@@ -61,6 +66,7 @@ public class AccountDao extends JdbcCrudDao<Account, Integer> {
     }
 
     /**
+     * @param  id of account
      * @return updated account or null if id not found
      */
     public Account updateAmountById(Integer id, Double amount) {

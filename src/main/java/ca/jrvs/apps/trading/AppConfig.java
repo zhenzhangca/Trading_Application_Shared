@@ -85,4 +85,12 @@ public class AppConfig {
         cm.setDefaultMaxPerRoute(50);
         return cm;
     }
+
+    public String getIex_host() {
+        return iex_host;
+    }
+
+    public void setIex_host(String iex_host) {
+        this.iex_host = iex_host;
+    }
 }

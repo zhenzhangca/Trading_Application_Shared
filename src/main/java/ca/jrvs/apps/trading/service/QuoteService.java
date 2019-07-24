@@ -37,7 +37,7 @@ public class QuoteService {
      */
     public static Quote buildQuoteFromIexQuote(IexQuote iexQuote) {
         Quote quote = new Quote();
-        quote.setTicker(iexQuote.getSymbol());
+        quote.setId(iexQuote.getSymbol());
         quote.setLastPrice(Double.parseDouble(Optional.ofNullable(iexQuote.getLatestPrice()).orElse("0")));
         quote.setAskPrice(Double.parseDouble(Optional.ofNullable(iexQuote.getIexAskPrice()).orElse("0")));
         quote.setBidPrice(Double.parseDouble(Optional.ofNullable(iexQuote.getIexBidPrice()).orElse("0")));
@@ -94,7 +94,7 @@ public class QuoteService {
      */
     public void updateMarketData() {
         List<Quote> quotes = quoteDao.findAll();
-        List<String> tickers = quotes.stream().map(Quote::getTicker).collect(Collectors.toList());
+        List<String> tickers = quotes.stream().map(Quote::getId).collect(Collectors.toList());
         List<IexQuote> iexQuotes = marketDataDao.findIexQuoteByTickers(tickers);
         List<Quote> updateQuotes = iexQuotes.stream().map(QuoteService::buildQuoteFromIexQuote).collect(Collectors.toList());
         quoteDao.update(updateQuotes);

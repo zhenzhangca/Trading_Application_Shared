@@ -530,4 +530,49 @@ public class IexQuote {
         this.ytdChange = ytdChange;
     }
 
+    @Override
+    public String toString() {
+        return "IexQuote{" +
+                "avgTotalVolume='" + avgTotalVolume + '\'' +
+                ", calculationPrice='" + calculationPrice + '\'' +
+                ", change='" + change + '\'' +
+                ", changePercent='" + changePercent + '\'' +
+                ", close='" + close + '\'' +
+                ", closeTime='" + closeTime + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", delayedPrice='" + delayedPrice + '\'' +
+                ", delayedPriceTime='" + delayedPriceTime + '\'' +
+                ", extendedChange='" + extendedChange + '\'' +
+                ", extendedChangePercent='" + extendedChangePercent + '\'' +
+                ", extendedPrice='" + extendedPrice + '\'' +
+                ", extendedPriceTime='" + extendedPriceTime + '\'' +
+                ", high='" + high + '\'' +
+                ", iexAskPrice='" + iexAskPrice + '\'' +
+                ", iexAskSize='" + iexAskSize + '\'' +
+                ", iexBidPrice='" + iexBidPrice + '\'' +
+                ", iexBidSize='" + iexBidSize + '\'' +
+                ", iexLastUpdated='" + iexLastUpdated + '\'' +
+                ", iexMarketPercent='" + iexMarketPercent + '\'' +
+                ", iexRealtimePrice='" + iexRealtimePrice + '\'' +
+                ", iexRealtimeSize='" + iexRealtimeSize + '\'' +
+                ", iexVolume='" + iexVolume + '\'' +
+                ", latestPrice='" + latestPrice + '\'' +
+                ", latestSource='" + latestSource + '\'' +
+                ", latestTime='" + latestTime + '\'' +
+                ", latestUpdate='" + latestUpdate + '\'' +
+                ", latestVolume='" + latestVolume + '\'' +
+                ", low='" + low + '\'' +
+                ", marketCap='" + marketCap + '\'' +
+                ", open='" + open + '\'' +
+                ", openTime='" + openTime + '\'' +
+                ", peRatio='" + peRatio + '\'' +
+                ", previousClose='" + previousClose + '\'' +
+                ", primaryExchange='" + primaryExchange + '\'' +
+                ", sector='" + sector + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", week52High='" + week52High + '\'' +
+                ", week52Low='" + week52Low + '\'' +
+                ", ytdChange='" + ytdChange + '\'' +
+                '}';
+    }
 }

@@ -51,6 +51,16 @@ public class Quote implements Entity<String> {
         this.askSize = askSize;
     }
 
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @JsonProperty("bidPrice")
     public Double getBidPrice() {
         return bidPrice;
@@ -71,15 +81,6 @@ public class Quote implements Entity<String> {
         this.bidSize = bidSize;
     }
 
-    @JsonProperty("id")
-    public String getId() {
-        return id;
-    }
-
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @JsonProperty("lastPrice")
     public Double getLastPrice() {
