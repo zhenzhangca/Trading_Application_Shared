@@ -4,6 +4,7 @@ import ca.jrvs.apps.trading.dao.MarketDataDao;
 import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,6 +97,7 @@ public class QuoteService {
         List<Quote> quotes = quoteDao.findAll();
         List<String> tickers = quotes.stream().map(Quote::getId).collect(Collectors.toList());
         List<IexQuote> iexQuotes = marketDataDao.findIexQuoteByTickers(tickers);
+
         List<Quote> updateQuotes = iexQuotes.stream().map(QuoteService::buildQuoteFromIexQuote).collect(Collectors.toList());
         quoteDao.update(updateQuotes);
     }

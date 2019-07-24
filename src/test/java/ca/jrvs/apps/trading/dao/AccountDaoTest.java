@@ -37,7 +37,7 @@ public class AccountDaoTest {
 
     @Test
     public void updateAmountById() {
-        Account updateResult = accountDao.updateAmountById(2, 2999.99);
+        Account updateResult = accountDao.updateAmountById(3, 2999.99);
         assertNotNull(updateResult);
         System.out.println(updateResult);
     }

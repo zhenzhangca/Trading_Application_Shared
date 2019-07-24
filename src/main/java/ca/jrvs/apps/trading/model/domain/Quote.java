@@ -10,9 +10,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "askSize",
         "bidPrice",
         "bidSize",
-        "id",
-        "lastPrice",
-        "ticker"
+        "ticker",
+        "lastPrice"
 })
 public class Quote implements Entity<String> {
 
@@ -24,12 +23,11 @@ public class Quote implements Entity<String> {
     private Double bidPrice;
     @JsonProperty("bidSize")
     private Integer bidSize;
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("lastPrice")
-    private Double lastPrice;
     @JsonProperty("ticker")
     private String ticker;
+    @JsonProperty("lastPrice")
+    private Double lastPrice;
+
 
     @JsonProperty("askPrice")
     public Double getAskPrice() {
@@ -53,12 +51,12 @@ public class Quote implements Entity<String> {
 
     @JsonProperty("id")
     public String getId() {
-        return id;
+        return ticker;
     }
 
     @JsonProperty("id")
     public void setId(String id) {
-        this.id = id;
+        this.ticker = id;
     }
 
     @JsonProperty("bidPrice")
@@ -109,9 +107,8 @@ public class Quote implements Entity<String> {
                 ", askSize=" + askSize +
                 ", bidPrice=" + bidPrice +
                 ", bidSize=" + bidSize +
-                ", id='" + id + '\'' +
-                ", lastPrice=" + lastPrice +
                 ", ticker='" + ticker + '\'' +
+                ", lastPrice=" + lastPrice +
                 '}';
     }
 }

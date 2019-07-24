@@ -57,5 +57,4 @@ public class RegisterService {
      */
     public void deleteTraderById(Integer traderId) {
     }
-
 }

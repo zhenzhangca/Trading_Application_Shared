@@ -22,7 +22,7 @@ public class QuoteDaoTest {
         quote.setBidPrice(10.5);
         quote.setBidSize(66);
         quote.setLastPrice(10.99);
-        quote.setTicker("CCCC");
+        quote.setId("dddd");
         Quote saveResult = quoteDao.save(quote);
         assertNotNull(saveResult);
     }

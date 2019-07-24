@@ -23,8 +23,8 @@ import static org.junit.Assert.*;
 
 
 public class QuoteServiceTest {
-    private AppConfig appConfig ;
-    private HttpClientConnectionManager httpClientConnectionManager ;
+    private AppConfig appConfig;
+    private HttpClientConnectionManager httpClientConnectionManager;
     private MarketDataConfig marketDataConfig;
     private QuoteDao quoteDao;
     private MarketDataDao marketDataDao;
@@ -32,29 +32,43 @@ public class QuoteServiceTest {
 
     @Test
     public void initQuotes() {
-        appConfig =new AppConfig();
+        appConfig = new AppConfig();
         appConfig.setIex_host("https://cloud.iexapis.com/v1");
         httpClientConnectionManager = appConfig.httpClientConnectionManager();
         marketDataConfig = appConfig.marketDataConfig();
-quoteDao = new QuoteDao(appConfig.dataSource());
-
-        marketDataDao = new MarketDataDao(httpClientConnectionManager,marketDataConfig);
-        quoteService = new QuoteService(quoteDao,marketDataDao);
+        quoteDao = new QuoteDao(appConfig.dataSource());
+        marketDataDao = new MarketDataDao(httpClientConnectionManager, marketDataConfig);
+        quoteService = new QuoteService(quoteDao, marketDataDao);
 
         List<String> tickerList = new ArrayList<>();
         tickerList.add("AMZN");
         tickerList.add("FB");
-//        List<IexQuote> securityList = tickerList.stream().map(marketDataDao::findIexQuoteByTicker).collect(Collectors.toList());
-//        System.out.println(securityList.get(1));
         quoteService.initQuotes(tickerList);
-
+        assertNotNull(quoteDao.findByTicker("AMZN"));
     }
 
     @Test
     public void initQuote() {
+        appConfig = new AppConfig();
+        appConfig.setIex_host("https://cloud.iexapis.com/v1");
+        httpClientConnectionManager = appConfig.httpClientConnectionManager();
+        marketDataConfig = appConfig.marketDataConfig();
+        quoteDao = new QuoteDao(appConfig.dataSource());
+        marketDataDao = new MarketDataDao(httpClientConnectionManager, marketDataConfig);
+        quoteService = new QuoteService(quoteDao, marketDataDao);
+        quoteService.initQuote("AAPL");
+        assertNotNull(quoteDao.findByTicker("AAPL"));
     }
 
     @Test
     public void updateMarketData() {
+        appConfig = new AppConfig();
+        appConfig.setIex_host("https://cloud.iexapis.com/v1");
+        httpClientConnectionManager = appConfig.httpClientConnectionManager();
+        marketDataConfig = appConfig.marketDataConfig();
+        quoteDao = new QuoteDao(appConfig.dataSource());
+        marketDataDao = new MarketDataDao(httpClientConnectionManager, marketDataConfig);
+        quoteService = new QuoteService(quoteDao, marketDataDao);
+        quoteService.updateMarketData();
     }
 }

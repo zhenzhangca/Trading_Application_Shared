@@ -30,7 +30,7 @@ public class TraderDaoTest {
 
     @Test
     public void findById() {
-        Trader findResult = traderDao.findById(1);
+        Trader findResult = traderDao.findById(4);
         assertNotNull(findResult);
         System.out.println(findResult);
     }
@@ -42,7 +42,7 @@ public class TraderDaoTest {
 
     @Test
     public void deleteById() {
-        traderDao.deleteById(1);
-        assertFalse(traderDao.existsById(1));
+        traderDao.deleteById(4);
+        assertFalse(traderDao.existsById(4));
     }
 }
