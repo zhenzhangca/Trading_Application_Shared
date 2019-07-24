@@ -38,6 +38,7 @@ public class MarketDataDao {
     }
 
     /**
+     * https://cloud.iexapis.com/v1/stock/market/batch?symbols=aapl,amzn&&types=quote&token=pk_02baaf19c0e9412d937bbe5b063640f1
      * @param tickerList
      * @return
      * @throws org.springframework.dao.DataRetrievalFailureException if unable to get HTTP response

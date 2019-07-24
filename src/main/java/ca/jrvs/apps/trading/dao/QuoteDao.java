@@ -29,7 +29,7 @@ public class QuoteDao extends JdbcCrudDao<Quote, String> {
 
     @Override
     public JdbcTemplate getJdbcTemplate() {
-        return null;
+        return jdbcTemplate;
     }
 
     @Override
@@ -39,12 +39,12 @@ public class QuoteDao extends JdbcCrudDao<Quote, String> {
 
     @Override
     public String getTableName() {
-        return null;
+        return TABLE_NAME;
     }
 
     @Override
     public String getIdName() {
-        return TABLE_NAME;
+        return ID_NAME;
     }
 
     @Override

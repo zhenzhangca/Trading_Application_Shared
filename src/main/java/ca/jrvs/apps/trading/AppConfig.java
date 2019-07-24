@@ -22,7 +22,7 @@ public class AppConfig {
 
     private Logger logger = LoggerFactory.getLogger(AppConfig.class);
     //Can hard code this for now or use env_var
-    @Value("${iex.host}")
+    @Value("https://cloud.iexapis.com/v1")
     private String iex_host;
 
     @Bean
