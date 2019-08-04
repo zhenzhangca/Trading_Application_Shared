@@ -1,11 +1,9 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Quote;
-import ca.jrvs.apps.trading.model.domain.Trader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.jdbc.IncorrectResultSetColumnCountException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -14,6 +12,8 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -65,8 +65,28 @@ public class QuoteDao extends JdbcCrudDao<Quote, String> {
 
     }
 
-    public void update(List<Quote> quoteList) {
+    /**
+     * https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#jdbc-batch-list
+     */
+    public void update(List<Quote> quotes) {
+        String updateSql = "UPDATE quote SET last_price=?, bid_price=?, bid_size=?, ask_price=?, ask_size=? WHERE ticker=?";
 
+        //Prepare batch update values (order must match updateSql question mark)
+        List<Object[]> batch = new ArrayList<>();
+        quotes.forEach(quote -> {
+            if (!existsById(quote.getTicker())) {
+                throw new ResourceNotFoundException("Ticker not found:" + quote.getTicker());
+            }
+            Object[] values = new Object[]{quote.getLastPrice(), quote.getBidPrice(), quote.getBidSize(),
+                    quote.getAskPrice(), quote.getAskSize(), quote.getTicker()};
+            batch.add(values);
+        });
+
+        int[] rows = jdbcTemplate.batchUpdate(updateSql, batch);
+        int totalRow = Arrays.stream(rows).sum();
+        if (totalRow != quotes.size()) {
+            throw new IncorrectResultSizeDataAccessException("Number of rows ", quotes.size(), totalRow);
+        }
     }
 
     public List<Quote> findAll() {
@@ -84,7 +104,7 @@ public class QuoteDao extends JdbcCrudDao<Quote, String> {
                     .queryForObject("select * from " + TABLE_NAME + " where ticker = ?",
                             BeanPropertyRowMapper.newInstance(Quote.class), ticker);
         } catch (EmptyResultDataAccessException e) {
-            throw new IllegalArgumentException("Can't find quote with "+ticker, e);
+            throw new IllegalArgumentException("Can't find quote with " + ticker, e);
         }
         return quote;
     }

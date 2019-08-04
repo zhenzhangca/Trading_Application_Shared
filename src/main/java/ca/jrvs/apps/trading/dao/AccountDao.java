@@ -4,7 +4,6 @@ import ca.jrvs.apps.trading.model.domain.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -21,7 +20,7 @@ public class AccountDao extends JdbcCrudDao<Account, Integer> {
     private SimpleJdbcInsert simpleJdbcInsert;
 
     @Autowired
-    public AccountDao(DataSource dataSource){
+    public AccountDao(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
         simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName(TABLE_NAME)
                 .usingGeneratedKeyColumns(ID_NAME);
@@ -53,7 +52,7 @@ public class AccountDao extends JdbcCrudDao<Account, Integer> {
     }
 
     @Override
-    public Account save(Account account){
+    public Account save(Account account) {
         return super.save(account);
     }
 
@@ -66,7 +65,7 @@ public class AccountDao extends JdbcCrudDao<Account, Integer> {
     }
 
     /**
-     * @param  id of account
+     * @param id of account
      * @return updated account or null if id not found
      */
     public Account updateAmountById(Integer id, Double amount) {

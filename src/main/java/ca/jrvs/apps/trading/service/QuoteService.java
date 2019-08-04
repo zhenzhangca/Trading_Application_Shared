@@ -4,11 +4,9 @@ import ca.jrvs.apps.trading.dao.MarketDataDao;
 import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +16,7 @@ import java.util.stream.Collectors;
  * Look at the SwaggerUI endpoints>quote controller. Only show iexQuote endpoint requires MarketDataDao.
  * There is no business logic, so skip QuoteService for now and use MarketDataDao directly in the QuoteController.
  */
-@Transactional
+//@Transactional
 @Service
 public class QuoteService {
 

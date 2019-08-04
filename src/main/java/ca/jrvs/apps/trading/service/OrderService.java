@@ -14,10 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
 @Service
-@Transactional
+//@Transactional
 public class OrderService {
     private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
@@ -72,10 +70,9 @@ public class OrderService {
         if (account.getAmount() >= buyPower) {
             double updateAmount = account.getAmount() - buyPower;
             accountDao.updateAmountById(marketOrderDto.getAccountId(), updateAmount);
-            //??????how to set status in SecurityOrder???
-            securityOrder.setStatus(OrderStatus.FILLED.toString());
+            securityOrder.setStatus(OrderStatus.FILLED);
         } else {
-            securityOrder.setStatus(OrderStatus.CANCELED.toString());
+            securityOrder.setStatus(OrderStatus.CANCELED);
             securityOrder.setNotes("Insufficient fund. Require buyPower: " + buyPower);
         }
     }
@@ -91,12 +88,10 @@ public class OrderService {
         if (position + marketOrderDto.getSize() >= 0) {
             Double sellAmount = -securityOrder.getSize() * securityOrder.getPrice();
             double updateAmount = account.getAmount() + sellAmount;
-            //??????how to set status in SecurityOrder???
-            securityOrder.setStatus(OrderStatus.FILLED.toString());
+            securityOrder.setStatus(OrderStatus.FILLED);
             accountDao.updateAmountById(marketOrderDto.getAccountId(), updateAmount);
         } else {
-            //???????how to set status in SecurityOrder???
-            securityOrder.setStatus(OrderStatus.CANCELED.toString());
+            securityOrder.setStatus(OrderStatus.CANCELED);
             securityOrder.setNotes("Insufficient position");
         }
     }

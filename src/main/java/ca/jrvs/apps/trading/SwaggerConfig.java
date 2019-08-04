@@ -29,11 +29,9 @@ public class SwaggerConfig {
                 .build()
                 .pathMapping("/")
                 .apiInfo(new ApiInfo("Jarvis Trading Rest App", "A Spring Rest API", "v1.0", null,
-                        new Contact("Edward Wang", "jrvs.ca", "edward@jrvs.ca"), null, null,
+                        new Contact("Zhen Zhang", "jrvs.ca", "zhenzhang@gmail.ca"), null, null,
                         new ArrayList<>()));
     }
-
-
 
     @Bean
     UiConfiguration uiConfig() {

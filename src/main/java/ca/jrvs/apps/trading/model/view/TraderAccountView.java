@@ -37,4 +37,5 @@ public class TraderAccountView {
     public void setTrader(Trader trader) {
         this.trader = trader;
     }
+
 }

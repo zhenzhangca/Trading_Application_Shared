@@ -16,11 +16,11 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 
 /**
- * Manualy confige JdbcTemplate and Datasource
+ * Manually configure JdbcTemplate and Datasource
  */
 @SpringBootApplication(exclude = {JdbcTemplateAutoConfiguration.class, DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-public class Application implements CommandLineRunner {
-    private Logger logger = LoggerFactory.getLogger(Application.class);
+public class TradingApplication implements CommandLineRunner {
+    private Logger logger = LoggerFactory.getLogger(TradingApplication.class);
     @Autowired
     private DataSource dataSource;
     @Value("aapl, msft, amzn, fb")
@@ -29,17 +29,20 @@ public class Application implements CommandLineRunner {
     private QuoteService quoteService;
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(Application.class);
+        SpringApplication app = new SpringApplication(TradingApplication.class);
         //Turn off web
-        //app.setWebApplicationType(WebApplicationType.NONE);
+
+//        app.setWebApplicationType(WebApplicationType.NONE);
         app.run(args);
+
     }
 
     @Override
     public void run(String... args) throws Exception {
 
         quoteService.initQuotes(Arrays.asList(initDailyList));
-        quoteService.updateMarketData();
+//        quoteService.updateMarketData();
+
 
     }
 }

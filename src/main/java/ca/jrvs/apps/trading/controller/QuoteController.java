@@ -5,10 +5,6 @@ import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.service.QuoteService;
-
-import java.util.Collections;
-import java.util.List;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -17,14 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Controller
@@ -46,7 +38,7 @@ public class QuoteController {
     /**
      * /quote/iexMarketData
      */
-    @ApiOperation(value = "Update all quotes with IEX", notes = "Update all quotes in the quote table. Use IEX trading API as market data source")
+    @ApiOperation(value = "Update quote table using iex data", notes = "Update all quotes in the quote table. Use IEX trading API as market data source")
     @PutMapping(path = "/iexMarketData")
     @ResponseStatus(HttpStatus.OK)
     public void updateMarketData() {
@@ -57,7 +49,7 @@ public class QuoteController {
         }
     }
 
-    @ApiOperation(value = "Update a quote", notes = "Manualy update a quote in the quote table for testing purpose")
+    @ApiOperation(value = "Update a given quote in the quote table", notes = "Manualy update a quote in the quote table for testing purpose")
     @PutMapping(path = "/")
     @ResponseStatus(HttpStatus.OK)
     public void putQuote(@RequestBody Quote quote) {
@@ -68,7 +60,7 @@ public class QuoteController {
         }
     }
 
-    @ApiOperation(value = "Add a ticker to dailyList", notes = "Init a new ticker in the dailyList")
+    @ApiOperation(value = "Add a ticker to dailyList(quote table)", notes = "Init a new ticker in the dailyList")
     @PostMapping(path = "/tickerId/{tickerId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void createQuote(@PathVariable String tickerId) {

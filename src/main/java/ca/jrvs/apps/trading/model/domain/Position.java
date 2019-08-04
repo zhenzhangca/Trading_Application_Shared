@@ -15,7 +15,7 @@ public class Position {
     @JsonProperty("accountId")
     private Integer accountId;
     @JsonProperty("position")
-    private Integer position;
+    private Long position;
     @JsonProperty("ticker")
     private String ticker;
 
@@ -30,12 +30,12 @@ public class Position {
     }
 
     @JsonProperty("position")
-    public Integer getPosition() {
+    public Long getPosition() {
         return position;
     }
 
     @JsonProperty("position")
-    public void setPosition(Integer position) {
+    public void setPosition(Long position) {
         this.position = position;
     }
 
@@ -47,5 +47,14 @@ public class Position {
     @JsonProperty("ticker")
     public void setTicker(String ticker) {
         this.ticker = ticker;
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "accountId=" + accountId +
+                ", position=" + position +
+                ", ticker='" + ticker + '\'' +
+                '}';
     }
 }

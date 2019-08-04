@@ -100,15 +100,4 @@ public class Quote implements Entity<String> {
         this.ticker = ticker;
     }
 
-    @Override
-    public String toString() {
-        return "Quote{" +
-                "askPrice=" + askPrice +
-                ", askSize=" + askSize +
-                ", bidPrice=" + bidPrice +
-                ", bidSize=" + bidSize +
-                ", ticker='" + ticker + '\'' +
-                ", lastPrice=" + lastPrice +
-                '}';
-    }
 }

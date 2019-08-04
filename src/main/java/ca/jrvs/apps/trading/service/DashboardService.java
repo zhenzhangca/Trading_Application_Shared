@@ -4,15 +4,20 @@ import ca.jrvs.apps.trading.dao.AccountDao;
 import ca.jrvs.apps.trading.dao.PositionDao;
 import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.dao.TraderDao;
+import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.Position;
+import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.model.view.PortfolioView;
+import ca.jrvs.apps.trading.model.view.SecurityRow;
 import ca.jrvs.apps.trading.model.view.TraderAccountView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-@Transactional
+//@Transactional
 public class DashboardService {
 
     private TraderDao traderDao;
@@ -38,11 +43,19 @@ public class DashboardService {
      * @param traderId trader ID
      * @return traderAccountView
      * @throws ca.jrvs.apps.trading.dao.ResourceNotFoundException if ticker is not found from IEX
-     * @throws org.springframework.dao.DataAccessException if unable to retrieve data
-     * @throws IllegalArgumentException for invalid input
+     * @throws org.springframework.dao.DataAccessException        if unable to retrieve data
+     * @throws IllegalArgumentException                           for invalid input
      */
     public TraderAccountView getTraderAccount(Integer traderId) {
-        return null;
+        if (!traderDao.existsById(traderId)) {
+            throw new IllegalArgumentException("Invalid trader ID!");
+        }
+        Account account = accountDao.findByTraderId(traderId);
+        Trader trader = traderDao.findById(traderId);
+        TraderAccountView traderAccountView = new TraderAccountView();
+        traderAccountView.setAccount(account);
+        traderAccountView.setTrader(trader);
+        return traderAccountView;
     }
 
     /**
@@ -54,10 +67,25 @@ public class DashboardService {
      * @param traderId
      * @return portfolioView
      * @throws ca.jrvs.apps.trading.dao.ResourceNotFoundException if ticker is not found from IEX
-     * @throws org.springframework.dao.DataAccessException if unable to retrieve data
-     * @throws IllegalArgumentException for invalid input
+     * @throws org.springframework.dao.DataAccessException        if unable to retrieve data
+     * @throws IllegalArgumentException                           for invalid input
      */
     public PortfolioView getProfileViewByTraderId(Integer traderId) {
-        return null;
+        if (!traderDao.existsById(traderId)) {
+            throw new IllegalArgumentException("Invalid trader ID!");
+        }
+        Account account = accountDao.findByTraderId(traderId);
+        List<Position> positions = positionDao.findByAccountId(account.getId());
+        PortfolioView portfolioView = new PortfolioView();
+        List<SecurityRow> securityRows = new ArrayList<>();
+        for (Position position : positions) {
+            SecurityRow securityRow = new SecurityRow();
+            securityRow.setPosition(position);
+            securityRow.setTicker(position.getTicker());
+            securityRow.setQuote(quoteDao.findById(position.getTicker()));
+            securityRows.add(securityRow);
+        }
+        portfolioView.setSecurityRows(securityRows);
+        return portfolioView;
     }
 }

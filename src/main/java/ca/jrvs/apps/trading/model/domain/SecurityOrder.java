@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "status",
         "ticker"
 })
-public class SecurityOrder implements Entity<Integer>{
+public class SecurityOrder implements Entity<Integer> {
 
     @JsonProperty("accountId")
     private Integer accountId;
@@ -26,8 +26,8 @@ public class SecurityOrder implements Entity<Integer>{
     private Double price;
     @JsonProperty("size")
     private Integer size;
-    @JsonProperty("status")
-    private String status;
+
+    private OrderStatus status;
     @JsonProperty("ticker")
     private String ticker;
 
@@ -81,13 +81,11 @@ public class SecurityOrder implements Entity<Integer>{
         this.size = size;
     }
 
-    @JsonProperty("status")
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    @JsonProperty("status")
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
@@ -99,5 +97,18 @@ public class SecurityOrder implements Entity<Integer>{
     @JsonProperty("ticker")
     public void setTicker(String ticker) {
         this.ticker = ticker;
+    }
+
+    @Override
+    public String toString() {
+        return "SecurityOrder{" +
+                "accountId=" + accountId +
+                ", id=" + id +
+                ", notes='" + notes + '\'' +
+                ", price=" + price +
+                ", size=" + size +
+                ", status=" + status +
+                ", ticker='" + ticker + '\'' +
+                '}';
     }
 }

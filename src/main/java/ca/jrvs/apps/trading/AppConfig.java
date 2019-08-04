@@ -32,7 +32,7 @@ public class AppConfig {
 
     @Bean
     public MarketDataConfig marketDataConfig() {
-        if(StringUtil.isEmpty(System.getenv("IEX_PUB_TOKEN"))||StringUtil.isEmpty(iex_host)){
+        if (StringUtil.isEmpty(System.getenv("IEX_PUB_TOKEN")) || StringUtil.isEmpty(iex_host)) {
             throw new IllegalArgumentException("ENV: IEX_PUB_TOKEN or property:iex_host is not set");
         }
         MarketDataConfig marketDataConfig = new MarketDataConfig();
@@ -57,14 +57,14 @@ public class AppConfig {
 //            user = System.getenv("RDBMS_USERNAME");
 //            password = System.getenv("RDBMS_PASSWORD");
 //        }else{
-            jdbcUrl = System.getenv("PSQL_URL");
-            user = System.getenv("PSQL_USER");
-            password = System.getenv("PSQL_PASSWORD");
+        jdbcUrl = System.getenv("PSQL_URL");
+        user = System.getenv("PSQL_USER");
+        password = System.getenv("PSQL_PASSWORD");
 
 
 //        }
-        logger.info("JDBC: "+jdbcUrl);
-        if(StringUtil.isEmpty(jdbcUrl, user, password)){
+        logger.info("JDBC: " + jdbcUrl);
+        if (StringUtil.isEmpty(jdbcUrl, user, password)) {
             throw new IllegalArgumentException("Missing datasource config env vars");
         }
 

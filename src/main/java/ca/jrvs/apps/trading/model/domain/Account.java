@@ -48,12 +48,4 @@ public class Account implements Entity<Integer> {
         this.traderId = traderId;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "amount=" + amount +
-                ", id=" + id +
-                ", traderId=" + traderId +
-                '}';
-    }
 }
