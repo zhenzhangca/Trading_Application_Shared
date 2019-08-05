@@ -9,11 +9,37 @@ Trading Application is a trading platform that allows professional traders to tr
 * Docker (17.05 or higher which support multi-stage build)
 * Java (1.8 or higher)
 * CentOS 7
-* IEX token for getting market data (`https://iexcloud.io/docs/api/`) 
+* IEX token for getting market data (`https://iexcloud.io/docs/api/`)
+**PSQL Database init**
+* Create database  
+`psql -h $PSQL_HOST -U $PSQL_USER -f ./sql_ddl/init_db.sql`  
+* Create tables  
+`psql -h $PSQL_HOST -U $PSQL_USER -d jrvstrading -f ./sql_ddl/schema.sql`  
+* ER diagram
+![ER](assets/ER.png)  
+**Start the Springboot app**
+* Run the app in terminal  
+. Package Maven project: `mvn clean package -DskipTests`  
+. Change directory: `cd target/trading-1.0-SNAPSHOT`, like this:  
+![trading-1.0-SNAPSHOT](assets/trading-1.0-SNAPSHOT%20(1).jpeg)  
+. Start the app: `bash -x ./run_trading_app.sh dev localhost postgres passowrd IEX_token`  
+* Run the app in IDEA  
+. Setup system env:  
+```
+export PSQL_URL=jdbc:postgresql://localhost:5432/jrvstrading
+export PSQL_USER=postgres
+export PSQL_PASSWORD=password
+export SPRING_PROFILES_ACTIVE=dev
+export IEX_PUB_TOKEN=xxxx
+```  
+. Create a java class named TradingApplication to configure Spring Boot, manually configure JdbcTemplate and Datasource.  
+. Run the main method.  
+After the app is running successfully in either terminal or IDEA, we will see the generated documentation rendered by Swagger UI on pointing your browser to http://localhost:8080/swagger-ui.html, like this:  
+![swagger](assets/swagger.png)  
 # REST API Usage
 ## Swagger
 As we know, Spring Boot makes developing RESTful services ridiculously easy, and using Swagger makes documenting your RESTful services easy. So in this Trading App Spring Boot project, I try to use Swagger 2 to generate REST API documentation for it.
-Swagger 2 is an open-source project used to describe and document RESTful APIs. Java code is bundled by the Swagger UI project to display the REST API on the browser, such as Chrome. Besides rendering documentation, Swagger UI allows other API developers or consumers to interact with the API?s resources without having any of the implementation logic in place.  
+Swagger 2 is an open-source project used to describe and document RESTful APIs. Java code is bundled by the Swagger UI project to display the REST API on the browser, such as Chrome. Besides rendering documentation, Swagger UI allows other API developers or consumers to interact with the API resources without having any of the implementation logic in place.  
 To bring it in, we need the following dependency declaration in our Maven POM.
 ```
 <dependency>
@@ -30,9 +56,6 @@ To bring it in, we need the following dependency declaration in our Maven POM.
 </dependency>
 ```
 In addition, I need to create a Docket bean (SwaggerConfig.java) in a Spring Boot configuration to configure Swagger 2 for the application. A Springfox Docket instance provides the primary API configuration with sensible defaults and convenience methods for configuration.  
-On pointing your browser to http://localhost:8080/swagger-ui.html, we will see the generated documentation rendered by Swagger UI, like this:  
-
-![swagger](assets/swagger.png)
 
 ## App Controller
 App Controller is just a test controller to make sure the app is successfully running. So there is only one endpoints in it.
