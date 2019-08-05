@@ -15,13 +15,14 @@ Trading Application is a trading platform that allows professional traders to tr
 `psql -h $PSQL_HOST -U $PSQL_USER -f ./sql_ddl/init_db.sql`  
 * Create tables  
 `psql -h $PSQL_HOST -U $PSQL_USER -d jrvstrading -f ./sql_ddl/schema.sql`  
-* ER diagram
+* ER diagram  
+
 ![ER](assets/ER.png)  
 **Start the Springboot app**
 * Run the app in terminal  
 . Package Maven project: `mvn clean package -DskipTests`  
 . Change directory: `cd target/trading-1.0-SNAPSHOT`, like this:  
-![trading-1.0-SNAPSHOT](assets/trading-1.0-SNAPSHOT%20(1).jpeg)  
+![trading-1.0-SNAPSHOT](assets/trading-1.0-SNAPSHOT.jpeg)  
 . Start the app: `bash -x ./run_trading_app.sh dev localhost postgres passowrd IEX_token`  
 * Run the app in IDEA  
 . Setup system env:  
