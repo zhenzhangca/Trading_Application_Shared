@@ -62,7 +62,7 @@ public class TraderDao implements CrudRepository<Trader, Integer> {
             throw new IllegalArgumentException("ID can't be null");
         }
         Integer count = jdbcTemplate.queryForObject("select count(*) from " + TABLE_NAME + " where id = ?", Integer.class, id);
-        return count != 0;
+        return count != null && count != 0;
     }
 
     @Override
