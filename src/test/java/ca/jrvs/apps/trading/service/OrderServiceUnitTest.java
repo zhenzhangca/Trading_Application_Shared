@@ -94,6 +94,5 @@ public class OrderServiceUnitTest {
         verify(securityOrderDao).save(captorSecurityOrder.capture());
         SecurityOrder captorOrder = captorSecurityOrder.getValue();
         assertEquals(OrderStatus.CANCELED, captorOrder.getStatus());
-
     }
 }

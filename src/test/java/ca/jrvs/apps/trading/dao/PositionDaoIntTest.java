@@ -15,7 +15,6 @@ public class PositionDaoIntTest {
     private DataSource dataSource;
     private PositionDao positionDao;
 
-
     @Before
     public void setup() {
         dataSource = new AppConfig().dataSource();

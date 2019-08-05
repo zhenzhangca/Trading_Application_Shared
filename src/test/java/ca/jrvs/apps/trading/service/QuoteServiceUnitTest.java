@@ -21,7 +21,6 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class QuoteServiceUnitTest {
 
-
     @InjectMocks
     private QuoteService quoteService;
     @Mock

@@ -17,7 +17,6 @@ import static ca.jrvs.apps.trading.util.JsonUtil.toJson;
 import static org.junit.Assert.assertNotNull;
 
 public class DashboardServiceIntTest {
-
     private AppConfig appConfig;
     private DataSource dataSource;
     private TraderDao traderDao;

@@ -14,13 +14,11 @@ public class TraderDaoIntTest {
     private DataSource dataSource;
     private TraderDao traderDao;
 
-
     @Before
     public void setup() {
         dataSource = new AppConfig().dataSource();
         traderDao = new TraderDao(dataSource);
     }
-
 
     @Test
     public void save() {
