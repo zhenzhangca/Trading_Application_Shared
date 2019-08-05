@@ -29,9 +29,9 @@ public class DashboardController {
     @GetMapping(path = "/portfolio/traderId/{traderId}")
     @ResponseStatus(HttpStatus.OK)
     public PortfolioView showPortfolioById(@PathVariable Integer traderId) {
-        try{
+        try {
             return dashboardService.getProfileViewByTraderId(traderId);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw ResponseExceptionUtil.getResponseStatusException(e);
         }
 
@@ -41,9 +41,9 @@ public class DashboardController {
     @GetMapping(path = "/profile/traderId/{traderId}")
     @ResponseStatus(HttpStatus.OK)
     public TraderAccountView showProfileById(@PathVariable Integer traderId) {
-        try{
+        try {
             return dashboardService.getTraderAccount(traderId);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw ResponseExceptionUtil.getResponseStatusException(e);
         }
     }

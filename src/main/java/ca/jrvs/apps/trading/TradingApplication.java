@@ -31,18 +31,13 @@ public class TradingApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(TradingApplication.class);
         //Turn off web
-
-//        app.setWebApplicationType(WebApplicationType.NONE);
+        //app.setWebApplicationType(WebApplicationType.NONE);
         app.run(args);
-
     }
 
     @Override
     public void run(String... args) throws Exception {
-
         quoteService.initQuotes(Arrays.asList(initDailyList));
-//        quoteService.updateMarketData();
-
-
+        //quoteService.updateMarketData();
     }
 }
