@@ -36,7 +36,7 @@ export SPRING_PROFILES_ACTIVE=dev
 export IEX_PUB_TOKEN=xxxx
 ```  
 2.Create a java class named TradingApplication to configure Spring Boot, manually configure JdbcTemplate and Datasource.  
-3.Run the main method, Our main method delegates to Spring Boot's Spring Application class by calling run. SpringApplication bootstraps the application, starting Spring, which, in turn, starts the auto-configured Tomcat web server, then the app will be successfully running like this:   
+3.Run the main method which delegates to Spring Boot's Spring Application class by calling run. SpringApplication bootstraps the application, starting Spring, which, in turn, starts the auto-configured Tomcat web server, then the app will be successfully running like this:   
   
 ![start](assets/start.png)  
 
@@ -120,10 +120,10 @@ Trader Controller contains five endpoints to implements CUD operations of trader
 | POST         | /trader/firstname/{firstname}/lastname/{lastname}   | Create a trader & an account.                   |
 |              | /dob/{dob}/country/{country}/email/{email}          |                                                 |
 | ------------ | --------------------------------------------------- | ----------------------------------------------- |
-| PUT          | /trader/deposit/traderId/{traderId}/amonut/{amount} | Deposit a fund to the account with given trader |
+| PUT          | /trader/deposit/traderId/{traderId}/amount/{amount} | Deposit a fund to the account with given trader |
 |              |                                                     | ID. Deposit amount must be greater than 0.      |
 | ------------ | --------------------------------------------------- | ----------------------------------------------- |
-| PUT          | /trader/withdraw/traderId/{traderId}/amonut/{amount}| Withdraw a fund from the account with given     |
+| PUT          | /trader/withdraw/traderId/{traderId}/amount/{amount}| Withdraw a fund from the account with given     |
 |              |                                                     | traderId. Withdraw amount must not exceed       |
 |              |                                                     | account amount.                                 |
 ```
@@ -143,10 +143,10 @@ The components like AccountDao, PositionDao, QuoteDao, SecurityOrderDao and Trad
 
 # Improvement
 - Design the interface of each layer to minimize the ripple effect between different layers.
-- Add transaction management so if we have calls to multiple data access objects we can specify that they occur within the same transaction, and  more importantly it means the data retrieved is going to be more consistent.
+- Add transaction management so if we have calls to multiple data access objects, we can specify that they occur within the same transaction, and  more importantly it means the data retrieved is going to be more consistent.
 - Enable caching so that if the number of data request increases, cache memory can store recently and frequently used data in order to reduce the number of database hits to increase performance of application. 
 - Design a functionality to compare and analyze both historical and real-time data to generate business insights.
-- Design front-end page to improve the user experience (Swagger UI is only suitable for testing).
+- Design front-end pages to improve the user experience (Swagger UI is only suitable for testing).
 
 
 
