@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 
 @Repository
 public class TraderDao implements CrudRepository<Trader, Integer> {
-
     private static final Logger logger = LoggerFactory.getLogger(TraderDao.class);
     private final String TABLE_NAME = "trader";
     private final String ID_COLUMN = "id";
@@ -49,7 +48,7 @@ public class TraderDao implements CrudRepository<Trader, Integer> {
                     .queryForObject("select * from " + TABLE_NAME + " where id = ?",
                             BeanPropertyRowMapper.newInstance(Trader.class), id);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("Can't find trader id:" + id, e);
+            logger.debug("Can't find trader ID:" + id, e);
         }
         return trader;
     }

@@ -36,7 +36,6 @@ public class MarketDataDao {
         BATCH_QUOTE_URL = marketDataConfig.getHost() + "/stock/market/batch?symbols=%s&types=quote&token="
                 + marketDataConfig.getToken();
     }
-
     /**
      * https://cloud.iexapis.com/v1/stock/market/batch?symbols=aapl,amzn&&types=quote&token=pk_02baaf19c0e9412d937bbe5b063640f1
      *

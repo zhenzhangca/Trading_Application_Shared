@@ -12,10 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Look at the SwaggerUI endpoints>quote controller. Only show iexQuote endpoint requires MarketDataDao.
- * There is no business logic, so skip QuoteService for now and use MarketDataDao directly in the QuoteController.
- */
 //@Transactional
 @Service
 public class QuoteService {

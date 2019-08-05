@@ -35,7 +35,6 @@ public class DashboardController {
             throw ResponseExceptionUtil.getResponseStatusException(e);
         }
     }
-
     @ApiOperation(value = "Show trader profile by trader ID", notes = "Show trader profile by trader ID.")
     @GetMapping(path = "/profile/traderId/{traderId}")
     @ResponseStatus(HttpStatus.OK)

@@ -60,7 +60,6 @@ public class AppConfig {
         return basicDataSource;
     }
 
-    //http://bit.ly/2tWTmzQ connectionPool
     @Bean
     public HttpClientConnectionManager httpClientConnectionManager() {
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();

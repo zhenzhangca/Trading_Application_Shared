@@ -33,7 +33,6 @@ public class QuoteController {
         this.quoteDao = quoteDao;
         this.marketDataDao = marketDataDao;
     }
-
     /**
      * /quote/iexMarketData
      */

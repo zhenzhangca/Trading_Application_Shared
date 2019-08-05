@@ -39,7 +39,7 @@ public class OrderService {
         SecurityOrder securityOrder = new SecurityOrder();
         Quote quote = quoteDao.findById(marketOrderDto.getTicker());
         if (quote == null) {
-            throw new IllegalArgumentException(marketOrderDto.getTicker() + " is not in the system");
+            throw new IllegalArgumentException(marketOrderDto.getTicker() + " does not exist in the system!");
         }
         securityOrder.setAccountId(marketOrderDto.getAccountId());
         securityOrder.setTicker(marketOrderDto.getTicker());

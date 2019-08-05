@@ -79,7 +79,7 @@ public class TraderController {
             @ApiResponse(code = 404, message = "traderId is not found"),
             @ApiResponse(code = 400, message = "Unable to deposit due to user input")
     })
-    @PutMapping(path = "/deposit/traderId/{traderId}/amonut/{amount}")
+    @PutMapping(path = "/deposit/traderId/{traderId}/amount/{amount}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Account depositFund(@PathVariable Double amount, @PathVariable Integer traderId) {
@@ -95,7 +95,7 @@ public class TraderController {
             @ApiResponse(code = 404, message = "traderId is not found"),
             @ApiResponse(code = 400, message = "Unable to withdraw due to user input (e.g. insufficient funds")
     })
-    @PutMapping(path = "/withdraw/traderId/{traderId}/amonut/{amount}")
+    @PutMapping(path = "/withdraw/traderId/{traderId}/amount/{amount}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Account withdrawFund(@PathVariable Double amount, @PathVariable Integer traderId) {

@@ -69,10 +69,10 @@ public class FundTransferService {
      */
     private void validateInput(Integer id, Double fund) {
         if (!traderDao.existsById(id)) {
-            throw new IllegalArgumentException("Invalid trade ID!");
+            throw new IllegalArgumentException("Invalid trader ID!");
         }
         if (fund == null || fund <= 0) {
-            throw new IllegalArgumentException("Positive amount is required here!");
+            throw new IllegalArgumentException("Positive amount is required!");
         }
     }
 }

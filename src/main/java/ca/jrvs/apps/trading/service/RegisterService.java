@@ -88,12 +88,12 @@ public class RegisterService {
         //Check account balance
         Account account = accountDao.findByTraderId(traderId);
         if (account.getAmount() != 0) {
-            throw new IllegalArgumentException("This account still has fund, cannot delete!");
+            throw new IllegalArgumentException("This account still has funds, cannot delete!");
         }
         //Check positions
         List<Position> positions = positionDao.findByAccountId(account.getId());
         if (positions.stream().anyMatch(position -> position.getPosition() != 0)) {
-            throw new IllegalArgumentException("This account still has position, cannot delete!");
+            throw new IllegalArgumentException("This account still has positions, cannot delete!");
         }
         securityOrderDao.deleteByAccountId(account.getId());
         accountDao.deleteById(account.getId());

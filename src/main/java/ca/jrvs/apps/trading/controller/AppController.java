@@ -16,7 +16,7 @@ public class AppController {
     /**
      * Test if the trading app is successfully running.
      * <p>
-     * User sent http request with the uri "localhost:8080/health", then receive the String "I am very healthy!"
+     * User sent http request with the uri: "localhost:8080/health", then receive the String "I am very healthy!"
      *
      * @return String http response
      */

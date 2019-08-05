@@ -63,7 +63,6 @@ public class QuoteDao extends JdbcCrudDao<Quote, String> {
         }
         return quote;
     }
-
     /**
      * https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#jdbc-batch-list
      */

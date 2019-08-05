@@ -63,7 +63,6 @@ public class AccountDao extends JdbcCrudDao<Account, Integer> {
     public Account findByTraderIdForUpdate(Integer traderId) {
         return super.findById("trader_id", traderId, true, getEntityClass());
     }
-
     /**
      * @param id of account
      * @return updated account or null if id not found

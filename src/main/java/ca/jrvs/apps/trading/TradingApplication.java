@@ -23,7 +23,7 @@ public class TradingApplication implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(TradingApplication.class);
     @Autowired
     private DataSource dataSource;
-    @Value("aapl, msft, amzn, fb")
+    @Value("aapl, msft, amzn, fb, goog")
     private String[] initDailyList;
     @Autowired
     private QuoteService quoteService;

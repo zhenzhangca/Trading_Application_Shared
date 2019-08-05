@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-
 import javax.sql.DataSource;
 
 @Repository
@@ -61,7 +60,7 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder, Integer> {
 
     public SecurityOrder findByAccountId(Integer accountId) {
         if (accountId == null) {
-            throw new IllegalArgumentException("AccountId cannot be null!");
+            throw new IllegalArgumentException("Account ID cannot be null!");
         }
         return super.findById("account_id", accountId, false, SecurityOrder.class);
     }

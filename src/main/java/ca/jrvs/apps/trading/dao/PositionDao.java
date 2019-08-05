@@ -82,7 +82,7 @@ public class PositionDao extends JdbcCrudDao {
                     = jdbcTemplate.queryForObject("select * from " + TABLE_NAME + " where account_id = ? and ticker = ?",
                     BeanPropertyRowMapper.newInstance(Position.class), accountId, ticker);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("Can't find account id:" + accountId, e + " or ticker:" + ticker, e);
+            logger.debug("Can't find account ID:" + accountId, e + " or ticker:" + ticker, e);
         }
         if (position == null) {
             throw new DataRetrievalFailureException("Unable to get data");

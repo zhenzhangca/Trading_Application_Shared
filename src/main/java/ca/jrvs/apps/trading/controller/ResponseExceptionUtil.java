@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 public class ResponseExceptionUtil {
-
     private static final Logger logger = LoggerFactory.getLogger(ResponseExceptionUtil.class);
 
     public static ResponseStatusException getResponseStatusException(Exception ex) {

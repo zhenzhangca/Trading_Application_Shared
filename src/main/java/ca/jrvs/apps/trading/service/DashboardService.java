@@ -32,7 +32,6 @@ public class DashboardService {
         this.accountDao = accountDao;
         this.quoteDao = quoteDao;
     }
-
     /**
      * Create and return a traderAccountView by trader ID
      * - get trader account by id
