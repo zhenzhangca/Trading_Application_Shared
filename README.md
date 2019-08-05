@@ -9,7 +9,7 @@ Trading Application is a trading platform that allows professional traders to tr
 * Docker (17.05 or higher which support multi-stage build)
 * Java (1.8 or higher)
 * CentOS 7
-* IEX token for getting market data (`https://iexcloud.io/docs/api/`)
+* IEX token for getting market data (`https://iexcloud.io/docs/api/`)  
 **PSQL Database init**
 * Create database  
 `psql -h $PSQL_HOST -U $PSQL_USER -f ./sql_ddl/init_db.sql`  
@@ -36,7 +36,7 @@ export IEX_PUB_TOKEN=xxxx
 . Create a java class named TradingApplication to configure Spring Boot, manually configure JdbcTemplate and Datasource.  
 . Run the main method, app is successfully running like this:   
 ![start](assets/start.png)
-After the app is running successfully in either terminal or IDEA, we will see the generated documentation rendered by Swagger UI on pointing your browser to http://localhost:8080/swagger-ui.html, like this:  
+After the app is running successfully in either terminal or IDEA, we will see the generated documentation rendered by Swagger UI on pointing the browser to http://localhost:8080/swagger-ui.html, like this:  
 ![swagger](assets/swagger.png)  
 # REST API Usage
 ## Swagger
