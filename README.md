@@ -45,7 +45,7 @@ After the app is running successfully in either terminal or IDEA, we will see th
 ![swagger](assets/swagger.png)  
 # REST API Usage
 ## Swagger
-As we know, Spring Boot makes developing RESTful services ridiculously easy, and using Swagger makes documenting your RESTful services easy. So in this Trading App Spring Boot project, I try to use Swagger 2 to generate REST API documentation for it.
+As we know, Spring Boot makes developing RESTful services ridiculously easy, and using Swagger makes documenting the RESTful services easy. So in this Trading App Spring Boot project, I try to use Swagger 2 to generate REST API documentation for it.
 Swagger 2 is an open-source project used to describe and document RESTful APIs. Java code is bundled by the Swagger UI project to display the REST API on the browser, such as Chrome. Besides rendering documentation, Swagger UI allows other API developers or consumers to interact with the API resources without having any of the implementation logic in place.  
 To bring it in, we need the following dependency declaration in our Maven POM.
 ```
@@ -144,7 +144,9 @@ The components like AccountDao, PositionDao, QuoteDao, SecurityOrderDao and Trad
 # Improvement
 - Design the interface of each layer to minimize the ripple effect between different layers.
 - Add transaction management so if we have calls to multiple data access objects we can specify that they occur within the same transaction, and  more importantly it means the data retrieved is going to be more consistent.
-- 
+- Enable caching so that if the number of data request increases, cache memory can store recently and frequently used data in order to reduce the number of database hits to increase performance of application. 
+- Design a functionality to compare and analyze both historical and real-time data to generate business insights.
+- Design front-end page to improve the user experience (Swagger UI is only suitable for testing).
 
 
 
