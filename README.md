@@ -36,7 +36,7 @@ export SPRING_PROFILES_ACTIVE=dev
 export IEX_PUB_TOKEN=xxxx
 ```  
 2.Create a java class named TradingApplication to configure Spring Boot, manually configure JdbcTemplate and Datasource.  
-3.Run the main method which delegates to Spring Boot's Spring Application class by calling run. SpringApplication bootstraps the application, starting Spring, which, in turn, starts the auto-configured Tomcat web server, then the app will be successfully running like this:   
+3.Run the main method which delegates to Spring Boot's SpringApplication class by calling run. SpringApplication bootstraps the application, starting Spring, which, in turn, starts the auto-configured Tomcat web server, then the app will be successfully running like this:   
   
 ![start](assets/start.png)  
 
