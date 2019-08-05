@@ -17,7 +17,6 @@ import java.util.List;
 //@Transactional
 @Service
 public class RegisterService {
-
     private TraderDao traderDao;
     private AccountDao accountDao;
     private PositionDao positionDao;

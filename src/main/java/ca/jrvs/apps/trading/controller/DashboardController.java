@@ -34,7 +34,6 @@ public class DashboardController {
         } catch (Exception e) {
             throw ResponseExceptionUtil.getResponseStatusException(e);
         }
-
     }
 
     @ApiOperation(value = "Show trader profile by trader ID", notes = "Show trader profile by trader ID.")

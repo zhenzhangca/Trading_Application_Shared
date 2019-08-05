@@ -98,7 +98,7 @@ Quote Controller allows users to implement CRU operations of quotes.
 | ------------ | -------------------------- | -------------------------------------------------------- ---- |
 | POST         | /quote/tickerId/{tickerId} | Init a new ticker in the dailyList.                           |   
 | ------------ | -------------------------- | -------------------------------------------------------- ---- |
-| PUT          | /quote/                    | Manualy update a quote in the quote table for testing purpose.|
+| PUT          | /quote/                    | Manually update a quote in the quote table for testing purpose.|
 | ------------ | -------------------------- | ------------------------------------------------------------- |
 | PUT          | /quote/iexMarketData       | Update all quotes in the quote table. Use IEX trading API as  |
 |              |                            | market data source.                                           |
@@ -136,9 +136,9 @@ Tomcat is a built-in embedded web server of Springboot. When we setup the depend
 - Controller layer  
  Building RESTful web services with Springboot, HTTP requests from the user are all handled by a controller, then appropriate responses are returned. These components are easily identified by the @Controller annotation. For example, the AppController handles GET requests for `/health` by returning a String `I am very healthy!`.   
 - Service layer  
-The components are identified by the @Service annotation, which means they are holding the business logic. Service layer mainly receives the request from controller layer and process the request to DAO layer
+The components are identified by the @Service annotation, which means they are holding the business logic. Service layer mainly receives the request from controller layer and processes the request to DAO layer
 - Dao layer  
-The components like AccountDao, PositionDao, QuoteDao, SecurityOrderDao and TraderDao are designed to talk to the database. The main function of these components are to perform CRUD operations on trading against the PostgreSQL database with a set of  entities. The MarketDataDao component is designed to perform market data query operation using httpClient from IEX cloud.
+The components like AccountDao, PositionDao, QuoteDao, SecurityOrderDao and TraderDao are designed to talk to the database. The main function of these components is to perform CRUD operations on trading against the PostgreSQL database with a set of  entities. The MarketDataDao component is designed to perform market data query operation using httpClient from IEX cloud.
 
 
 # Improvement

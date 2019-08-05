@@ -22,7 +22,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/quote")
 public class QuoteController {
-
     private QuoteService quoteService;
     private QuoteDao quoteDao;
     private MarketDataDao marketDataDao;

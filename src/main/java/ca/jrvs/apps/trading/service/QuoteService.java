@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 //@Transactional
 @Service
 public class QuoteService {
-
     private QuoteDao quoteDao;
     private MarketDataDao marketDataDao;
 
@@ -79,7 +78,6 @@ public class QuoteService {
         initQuotes(Collections.singletonList(ticker));
     }
 
-
     /**
      * Update quote table against IEX source
      * - get all quotes from the db
@@ -95,7 +93,6 @@ public class QuoteService {
         List<Quote> quotes = quoteDao.findAll();
         List<String> tickers = quotes.stream().map(Quote::getId).collect(Collectors.toList());
         List<IexQuote> iexQuotes = marketDataDao.findIexQuoteByTickers(tickers);
-
         List<Quote> updateQuotes = iexQuotes.stream().map(QuoteService::buildQuoteFromIexQuote).collect(Collectors.toList());
         quoteDao.update(updateQuotes);
     }

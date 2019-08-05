@@ -62,7 +62,6 @@ public class QuoteDao extends JdbcCrudDao<Quote, String> {
             throw new IncorrectResultSizeDataAccessException("Failed to insert ", 1, row);
         }
         return quote;
-
     }
 
     /**

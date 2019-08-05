@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 //@Transactional
 public class DashboardService {
-
     private TraderDao traderDao;
     private PositionDao positionDao;
     private AccountDao accountDao;

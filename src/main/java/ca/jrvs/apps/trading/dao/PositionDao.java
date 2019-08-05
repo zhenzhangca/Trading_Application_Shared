@@ -50,7 +50,7 @@ public class PositionDao extends JdbcCrudDao {
     }
 
     @Override
-    Class getEntityClass() {
+    public Class getEntityClass() {
         return Position.class;
     }
 

@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 //@Transactional
 public class OrderService {
     private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
-
     private AccountDao accountDao;
     private SecurityOrderDao securityOrderDao;
     private QuoteDao quoteDao;
@@ -36,7 +35,6 @@ public class OrderService {
         if (marketOrderDto == null || marketOrderDto.getSize() == 0) {
             throw new IllegalArgumentException("Invalid order size");
         }
-
         //Init order
         SecurityOrder securityOrder = new SecurityOrder();
         Quote quote = quoteDao.findById(marketOrderDto.getTicker());
@@ -48,7 +46,6 @@ public class OrderService {
         //Check ask size
         securityOrder.setSize(marketOrderDto.getSize());
         Account account = accountDao.findByIdForUpdate(marketOrderDto.getAccountId());
-
         //Handle buy or sell order
         if (marketOrderDto.getSize() > 0) {
             securityOrder.setPrice(quote.getAskPrice());

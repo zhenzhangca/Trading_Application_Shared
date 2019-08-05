@@ -18,10 +18,8 @@ import javax.sql.DataSource;
 public class TraderDao implements CrudRepository<Trader, Integer> {
 
     private static final Logger logger = LoggerFactory.getLogger(TraderDao.class);
-
     private final String TABLE_NAME = "trader";
     private final String ID_COLUMN = "id";
-
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleInsert;
 

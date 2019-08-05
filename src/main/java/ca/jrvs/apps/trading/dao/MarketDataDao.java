@@ -72,7 +72,6 @@ public class MarketDataDao {
             }
         });
         return iexQuotes;
-
     }
 
     public IexQuote findIexQuoteByTicker(String ticker) {
