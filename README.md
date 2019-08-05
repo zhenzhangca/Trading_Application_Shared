@@ -33,7 +33,8 @@ export SPRING_PROFILES_ACTIVE=dev
 export IEX_PUB_TOKEN=xxxx
 ```  
 . Create a java class named TradingApplication to configure Spring Boot, manually configure JdbcTemplate and Datasource.  
-. Run the main method.  
+. Run the main method, app is successfully running like this:   
+![start](assets/start.png)
 After the app is running successfully in either terminal or IDEA, we will see the generated documentation rendered by Swagger UI on pointing your browser to http://localhost:8080/swagger-ui.html, like this:  
 ![swagger](assets/swagger.png)  
 # REST API Usage
