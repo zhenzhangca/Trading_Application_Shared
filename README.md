@@ -67,14 +67,14 @@ In addition, create a Docket bean (SwaggerConfig.java) in a Spring Boot configur
 ## App Controller
 App Controller is just a test controller to make sure the app is successfully running. So there is only one endpoints in it.
 ```
-| Request Type | URI          | Endpoint explanation                                        |
+| Request Type | URI          | Endpoint explanation                                         |
 | ------------ | ------------ | ------------------------------------------------------------ |
 | GET          | /health      | Test if the Springboot trading app is successfully running.  |
 ```
 ## Dashboard Controller
 Dashboard Controller mainly implements the trader information display operation, such as portfolio and trader profile.
 ```
-| Request Type | URI                                      | Endpoint explanation            |
+| Request Type | URI                                      | Endpoint explanation             |
 | ------------ | ---------------------------------------- | -------------------------------- |
 | GET          | /dashboard/portfolio/traderId/{traderId} | Show portfolio by trader ID.     |
 | ------------ | ---------------------------------------- | ---------------------------------|
@@ -83,14 +83,14 @@ Dashboard Controller mainly implements the trader information display operation,
 ## Order Controller
 Order Controller only contains one endpoint to implement the execution of a market order.
 ```
-| Request Type | URI                 | Endpoint explanation                                         |
+| Request Type | URI                 | Endpoint explanation                                          |
 | ------------ | ------------------- | ------------------------------------------------------------- |
 | POST         | /order/marketOrder  | Execute a market order, then return the result securityOrder. |
 ```
 ## Quote Controller
 Quote Controller allows users to implement CRU operations of quotes.
 ```
-| Request Type | URI                        | Endpoint explanation                                         |
+| Request Type | URI                        | Endpoint explanation                                          |
 | ------------ | -------------------------- | --------------------------------------------------------- --- |
 | GET          | /quote/dailyList           | Show dailyList for trading system.                            |
 | ------------ | -------------------------- | -------------------------------------------------------- ---- |
@@ -106,7 +106,7 @@ Quote Controller allows users to implement CRU operations of quotes.
 ## Trader Controller
 Trader Controller contains five endpoints to implements CUD operations of traders and funds.
 ```
-| Request Type | URI                                                 | Endpoint explanation                           |
+| Request Type | URI                                                 | Endpoint explanation                            |
 | ------------ | --------------------------------------------------- | ----------------------------------------------- |
 | DELETE       | /trader/traderId/{traderId}                         | Delete a trader IFF its account amount is 0 and |
 |              |                                                     | no open positions. Also delete the associated   |
