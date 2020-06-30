@@ -23,8 +23,8 @@ Trading Application is a trading platform simulation that allows traders to trad
 ![ER](assets/ER.png)  
 ## Start the Springboot trading app
 - Run the app in terminal  
-1.Package Maven project: `mvn clean package -DskipTests`  
-2.Change directory: `cd target/trading-1.0-SNAPSHOT`, like this:  
+1. Package Maven project: `mvn clean package -DskipTests`  
+2. Change directory: `cd target/trading-1.0-SNAPSHOT`, like this:  
 ![trading-1.0-SNAPSHOT](assets/trading-1.0-SNAPSHOT.jpeg)  
 3.Start the app: `bash -x ./run_trading_app.sh dev localhost postgres passowrd IEX_token`  
 - Run the app in IDEA  
