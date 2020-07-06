@@ -64,7 +64,8 @@ To bring it in, we need the following dependency declaration in our Maven POM.
 ```
 In addition, create a Docket bean (SwaggerConfig.java) in a Spring Boot configuration to configure Swagger 2 for the application. A Springfox Docket instance provides the primary API configuration with sensible defaults and convenience methods for configuration.  
 
-## App Controller
+## App Controller  
+http://localhost:9081/swagger-ui.html
 App Controller is just a test controller to make sure the app is successfully running. So there is only one endpoints in it.
 ```
 | Request Type | URI          | Endpoint explanation                                         |
