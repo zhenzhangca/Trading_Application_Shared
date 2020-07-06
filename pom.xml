@@ -21,7 +21,7 @@
         <interceptor-api.version>1.2</interceptor-api.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <mockito.version>3.2.4</mockito.version>
-        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <mysql.version>8.0.17</mysql.version>
     </properties>
 
