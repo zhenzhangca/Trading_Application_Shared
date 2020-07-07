@@ -51,13 +51,13 @@ CREATE TABLE SECURITY_ORDER
 );
 
 --implement with SQL in repository
-DROP VIEW IF EXISTS position;
-
-CREATE OR REPLACE VIEW POSITION
-AS
-SELECT account_id,
-       ticker,
-       sum(size) AS position
-FROM security_order
-WHERE status = 'FILLED'
-GROUP BY account_id, ticker;
+--DROP VIEW IF EXISTS position;
+--
+--CREATE OR REPLACE VIEW POSITION
+--AS
+--SELECT ACCOUNT_ID,
+--       TICKER,
+--       sum(size) AS POSITION
+--FROM security_order
+--WHERE status = 'FILLED'
+--GROUP BY account_id, ticker;

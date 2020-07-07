@@ -2,7 +2,9 @@ package ca.jrvs.apps.trading.repositoris.models.domain;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -14,7 +16,9 @@ import javax.persistence.Entity;
 public class Position {
 
     private Integer accountId;
+
     private Long position;
+
     private String ticker;
 
 }

@@ -1,10 +1,12 @@
 package ca.jrvs.apps.trading.repositoris.models.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Getter
@@ -28,7 +30,8 @@ public class Trader implements Serializable {
     @Column(name = "COUNTRY", nullable = false)
     private String country;
     @Column(name = "DOB", nullable = false)
-    private Date dob;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Timestamp dob;
     @Column(name = "EMAIL", nullable = false)
     private String email;
     @Column(name = "FIRST_NAME", nullable = false)

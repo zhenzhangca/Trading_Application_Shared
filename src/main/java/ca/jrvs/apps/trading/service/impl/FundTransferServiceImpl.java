@@ -32,9 +32,11 @@ public class FundTransferServiceImpl implements FundTransferService {
      * @throws IllegalArgumentException                    for invalid input
      */
     public AccountResponse deposit(Integer traderId, Double fund) {
+        //check whether trader id exists or not
         validateInput(traderId, fund);
         Account account = accountRepo.findByTraderId(traderId);
-        Account updatedAccount = accountRepo.updateAmountById(account.getId(), account.getAmount() + fund);
+        accountRepo.updateAmountById(account.getId(), account.getAmount() + fund);
+        Account updatedAccount = accountRepo.findByTraderId(traderId);
         return convertAccount(updatedAccount);
     }
 
@@ -61,14 +63,15 @@ public class FundTransferServiceImpl implements FundTransferService {
      * @throws IllegalArgumentException                           for invalid input
      */
     public AccountResponse withdraw(Integer traderId, Double fund) {
+        //check whether trader id exists or not
         validateInput(traderId, fund);
         Account account = accountRepo.findByTraderId(traderId);
-        Account updatedAccount = null;
         if (account.getAmount() - fund >= 0) {
-            updatedAccount = accountRepo.updateAmountById(account.getId(), account.getAmount() - fund);
+            accountRepo.updateAmountById(account.getId(), account.getAmount() - fund);
         } else {
             throw new IllegalArgumentException("Insufficient funds!");
         }
+        Account updatedAccount = accountRepo.findByTraderId(traderId);
         return convertAccount(updatedAccount);
     }
 
@@ -77,7 +80,7 @@ public class FundTransferServiceImpl implements FundTransferService {
      */
     private void validateInput(Integer id, Double fund) {
         if (!traderRepo.existsById(id)) {
-            throw new IllegalArgumentException("Invalid trader ID!");
+            throw new IllegalArgumentException("Trader ID doesn't exist!");
         }
         if (fund == null || fund <= 0) {
             throw new IllegalArgumentException("Positive amount is required!");

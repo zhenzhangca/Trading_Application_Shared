@@ -1,10 +1,7 @@
 package ca.jrvs.apps.trading.service.impl;
 
 import ca.jrvs.apps.trading.excptions.ResourceNotFoundException;
-import ca.jrvs.apps.trading.repositoris.AccountRepository;
-import ca.jrvs.apps.trading.repositoris.PositionSqlRepository;
-import ca.jrvs.apps.trading.repositoris.QuoteRepository;
-import ca.jrvs.apps.trading.repositoris.TraderRepository;
+import ca.jrvs.apps.trading.repositoris.*;
 import ca.jrvs.apps.trading.repositoris.models.domain.*;
 import ca.jrvs.apps.trading.service.DashboardService;
 import ca.jrvs.apps.trading.web.resources.PortfolioResponse;
@@ -25,7 +22,7 @@ public class DashboardServiceImpl implements DashboardService {
     @Autowired
     private TraderRepository traderRepo;
     @Autowired
-    private PositionSqlRepository positionRepo;
+    private PositionSqlRepository positionSqlRepo;
     @Autowired
     private AccountRepository accountRepo;
     @Autowired
@@ -83,7 +80,7 @@ public class DashboardServiceImpl implements DashboardService {
             throw new IllegalArgumentException("Invalid trader ID!");
         }
         Account account = accountRepo.findByTraderId(traderId);
-        List<Position> positions = positionRepo.findByAccountId(account.getId());
+        List<Position> positions = positionSqlRepo.findByAccountId(account.getId());
 
         List<SecurityRow> securityRows = new ArrayList<>();
 

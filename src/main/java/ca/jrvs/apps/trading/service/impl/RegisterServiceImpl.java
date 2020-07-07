@@ -1,10 +1,7 @@
 package ca.jrvs.apps.trading.service.impl;
 
 import ca.jrvs.apps.trading.excptions.ResourceNotFoundException;
-import ca.jrvs.apps.trading.repositoris.AccountRepository;
-import ca.jrvs.apps.trading.repositoris.PositionSqlRepository;
-import ca.jrvs.apps.trading.repositoris.SecurityOrderRepository;
-import ca.jrvs.apps.trading.repositoris.TraderRepository;
+import ca.jrvs.apps.trading.repositoris.*;
 import ca.jrvs.apps.trading.repositoris.models.domain.Account;
 import ca.jrvs.apps.trading.repositoris.models.domain.Position;
 import ca.jrvs.apps.trading.repositoris.models.domain.Trader;
@@ -28,7 +25,7 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private AccountRepository accountRepo;
     @Autowired
-    private PositionSqlRepository positionRepo;
+    private PositionSqlRepository positionSqlRepo;
     @Autowired
     private SecurityOrderRepository securityOrderRepo;
 
@@ -50,14 +47,10 @@ public class RegisterServiceImpl implements RegisterService {
         /**
          * Validate user input using reflection
          */
-        if (req.getId() != null) {
-            throw new IllegalArgumentException("ID is not allowed as it is auto-gen");
-        }
         if (StringUtil.isEmpty(req.getFirstName(), req.getLastName(), req.getCountry(), req.getEmail()) || req.getDob() == null) {
             throw new IllegalArgumentException("Fields of trader can not be empty or null");
         }
         Trader model = Trader.builder()
-                .id(req.getId())
                 .country(req.getCountry())
                 .dob(req.getDob())
                 .email(req.getEmail())
@@ -70,7 +63,7 @@ public class RegisterServiceImpl implements RegisterService {
         Account account = new Account();
         //account.setId(1); //auto-generated
         account.setTraderId(newTrader.getId());
-        account.setAmount(0.0);
+        account.setAmount(0.0); //initialized with 0.0
         Account newAccount = accountRepo.save(account);
         //Create a new traderAccountView, then return
         TraderProfile traderProfile = TraderProfile.builder()
@@ -106,13 +99,12 @@ public class RegisterServiceImpl implements RegisterService {
             throw new IllegalArgumentException("Trader with " + traderId + " doesn't exist!");
         }
         //Check account balance
-        Optional<Account> result = accountRepo.findById(traderId);
-        Account account = result.isPresent()?result.get():null;
+        Account account = accountRepo.findByTraderId(traderId);
         if (account != null && account.getAmount() != 0) {
             throw new IllegalArgumentException("This account still has funds, cannot delete!");
         }
         //Check positions
-        List<Position> positions = positionRepo.findByAccountId(account.getId());
+        List<Position> positions = positionSqlRepo.findByAccountId(account.getId());
         if (positions.stream().anyMatch(position -> position.getPosition() != 0)) {
             throw new IllegalArgumentException("This account still has positions, cannot delete!");
         }

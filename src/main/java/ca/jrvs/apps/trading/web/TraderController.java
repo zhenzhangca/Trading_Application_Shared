@@ -1,17 +1,14 @@
 package ca.jrvs.apps.trading.web;
 
-import ca.jrvs.apps.trading.repositoris.models.domain.Account;
 import ca.jrvs.apps.trading.service.FundTransferService;
 import ca.jrvs.apps.trading.service.RegisterService;
 import ca.jrvs.apps.trading.util.ResponseExceptionUtil;
 import ca.jrvs.apps.trading.web.resources.AccountResponse;
-import ca.jrvs.apps.trading.web.resources.PortfolioResponse;
 import ca.jrvs.apps.trading.web.resources.TraderProfileResponse;
 import ca.jrvs.apps.trading.web.resources.TraderRequest;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,16 +27,17 @@ public class TraderController {
     @DeleteMapping(path = "/traderId/{traderId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Delete a trader", notes = "Delete a trader IFF its account amount is 0 and no open positions. Also delete the associated account and securityOrders.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Request completes sucessfully."),
-            @ApiResponse(code = 404, message = "Not found."),
+            @ApiResponse(code = 200, message = "Request completes successfully."),
+//            @ApiResponse(code = 404, message = "Not found."),
             @ApiResponse(code = 400, message = "Unable to delete the trader."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
-    public void deleteTrader(
+    public ResponseEntity<?> deleteTrader(
             @ApiParam(value = "Trader ID")
             @PathVariable Integer traderId) {
         try {
             registerService.deleteTraderById(traderId);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             throw ResponseExceptionUtil.getResponseStatusException(e);
         }
@@ -54,7 +52,7 @@ public class TraderController {
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
     public ResponseEntity<?> createTrader(
-            @ApiParam(value = "Trader Request")
+            @ApiParam(value = "Trader Request", format = "yyyy-MM-dd")
             @RequestBody TraderRequest req) {
         try {
             TraderProfileResponse response = registerService.createTraderAndAccount(req);

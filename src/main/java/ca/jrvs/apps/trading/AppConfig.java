@@ -2,6 +2,7 @@ package ca.jrvs.apps.trading;
 
 import ca.jrvs.apps.trading.repositoris.models.config.MarketDataConfig;
 import ca.jrvs.apps.trading.util.StringUtil;
+import lombok.*;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.slf4j.Logger;
@@ -13,10 +14,17 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.Entity;
 import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
+@Getter
+@Setter
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppConfig {
     private Logger logger = LoggerFactory.getLogger(AppConfig.class);
     //Can hard code this for now or use env_var
@@ -28,10 +36,10 @@ public class AppConfig {
     private String iex_token;
 
 
-    @Bean
-    public PlatformTransactionManager txManager(DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
-    }
+//    @Bean
+//    public PlatformTransactionManager txManager(DataSource dataSource) {
+//        return new DataSourceTransactionManager(dataSource);
+//    }
 
     @Bean
     public MarketDataConfig marketDataConfig() {
@@ -71,13 +79,5 @@ public class AppConfig {
         cm.setMaxTotal(50);
         cm.setDefaultMaxPerRoute(50);
         return cm;
-    }
-
-    public String getIex_host() {
-        return iex_host;
-    }
-
-    public void setIex_host(String iex_host) {
-        this.iex_host = iex_host;
     }
 }
