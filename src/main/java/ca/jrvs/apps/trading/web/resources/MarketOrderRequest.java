@@ -16,4 +16,5 @@ public class MarketOrderRequest {
     private Integer accountId;
     private Integer size;
     private String ticker;
+    private String notes;
 }

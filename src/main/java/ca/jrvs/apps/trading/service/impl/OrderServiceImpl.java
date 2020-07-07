@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Column;
 import java.util.Optional;
 
 @Service("OrderServiceImpl")
@@ -38,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
                 .accountId(req.getAccountId())
                 .ticker(req.getTicker())
                 .size(req.getSize())
+                .notes(req.getNotes())
                 .build();
         Optional<Quote> quoteResult = quoteRepo.findById(req.getTicker());
         Quote quote = null;
@@ -53,13 +55,14 @@ public class OrderServiceImpl implements OrderService {
         if (req.getSize() > 0) {
             securityOrder.setPrice(quote.getAskPrice());
             handleBuyMarketOrder(req, securityOrder, account);
-        } else {
+        } else {   //size == 0 has been ruled out in corner case, so here is only negative value
             //Check position for sell order
             securityOrder.setPrice(quote.getBidPrice());
             handleSellMarketOrder(req, securityOrder, account);
         }
         SecurityOrder savedSecurityOrder = securityOrderRepo.save(securityOrder);
         return convertSecurityOrder(savedSecurityOrder);
+
     }
 
     private SecurityOrderResponse convertSecurityOrder(SecurityOrder model) {
@@ -77,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * @throws java.sql.SQLException if failed to fetch data from DB
      */
-    protected void handleBuyMarketOrder(MarketOrderRequest req, SecurityOrder securityOrder, Account account) {
+    private void handleBuyMarketOrder(MarketOrderRequest req, SecurityOrder securityOrder, Account account) {
         //Advanced SELECT for UPDATE
         Double buyPower = req.getSize() * securityOrder.getPrice();
         if (account.getAmount() >= buyPower) {
@@ -95,17 +98,17 @@ public class OrderServiceImpl implements OrderService {
      *
      * @throws java.sql.SQLException if failed to fetch data from DB
      */
-    protected void handleSellMarketOrder(MarketOrderRequest req, SecurityOrder securityOrder, Account account) {
-//        Long position = positionRepo.findByIdAndTicker(req.getAccountId(), req.getTicker());
-//        log.debug("AccountId: " + req.getAccountId() + " has position: " + position);
-//        if (position + req.getSize() >= 0) {
-//            Double sellAmount = -securityOrder.getSize() * securityOrder.getPrice();
-//            double updateAmount = account.getAmount() + sellAmount;
-//            securityOrder.setStatus(OrderStatus.FILLED);
-//            accountRepo.updateAmountById(req.getAccountId(), updateAmount);
-//        } else {
-//            securityOrder.setStatus(OrderStatus.CANCELLED);
-//            securityOrder.setNotes("Insufficient position");
-//        }
+    private void handleSellMarketOrder(MarketOrderRequest req, SecurityOrder securityOrder, Account account) {
+        Long position = positionRepo.findByIdAndTicker(req.getAccountId(), req.getTicker());
+        log.debug("AccountId: " + req.getAccountId() + " has position: " + position);
+        if (position + req.getSize() >= 0) {
+            Double sellAmount = -securityOrder.getSize() * securityOrder.getPrice();
+            double updateAmount = account.getAmount() + sellAmount;
+            securityOrder.setStatus(OrderStatus.FILLED);
+            accountRepo.updateAmountById(req.getAccountId(), updateAmount);
+        } else {
+            securityOrder.setStatus(OrderStatus.CANCELLED);
+            securityOrder.setNotes("Insufficient position");
+        }
     }
 }

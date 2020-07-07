@@ -5,10 +5,7 @@ import ca.jrvs.apps.trading.util.ResponseExceptionUtil;
 import ca.jrvs.apps.trading.web.resources.MarketOrderRequest;
 import ca.jrvs.apps.trading.web.resources.PortfolioResponse;
 import ca.jrvs.apps.trading.web.resources.SecurityOrderResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -43,7 +40,9 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Unable to post due to input."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
-    public ResponseEntity<?> addMarketOrder(@Valid @RequestBody MarketOrderRequest req) {
+    public ResponseEntity<?> addMarketOrder(
+            @ApiParam("MarketOrderRequest, BUY with positive size value, SELL with negative size value")
+            @Valid @RequestBody MarketOrderRequest req) {
         try {
             SecurityOrderResponse response = orderService.addMarketOrder(req);
             return ResponseEntity

@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.repositoris;
 
 import ca.jrvs.apps.trading.repositoris.models.domain.SecurityOrder;
+import ca.jrvs.apps.trading.repositoris.models.domain.Trader;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
