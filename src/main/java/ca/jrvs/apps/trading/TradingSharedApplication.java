@@ -6,12 +6,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TradingApplication {
-    private Logger logger = LoggerFactory.getLogger(TradingApplication.class);
+public class TradingSharedApplication {
+    private Logger logger = LoggerFactory.getLogger(TradingSharedApplication.class);
 
 
     public static void main(String[] args) {
-        SpringApplication.run(TradingApplication.class, args);
+        SpringApplication.run(TradingSharedApplication.class, args);
     }
 
 }
