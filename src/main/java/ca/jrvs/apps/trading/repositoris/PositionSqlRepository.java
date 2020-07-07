@@ -4,7 +4,6 @@ import ca.jrvs.apps.trading.repositoris.models.domain.Position;
 import ca.jrvs.apps.trading.util.PositionRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;

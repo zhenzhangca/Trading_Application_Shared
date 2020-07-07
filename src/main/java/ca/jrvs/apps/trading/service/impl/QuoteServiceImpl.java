@@ -110,7 +110,7 @@ public class QuoteServiceImpl implements QuoteService {
             quoteRepo.save(updateQuote);
         });
         List<QuoteResponse> updateQuoteResponse = new ArrayList<>();
-        updateQuotes.stream().forEach(updateQuote ->{
+        updateQuotes.stream().forEach(updateQuote -> {
             QuoteResponse response = convertQuote(updateQuote);
             updateQuoteResponse.add(response);
         });
@@ -132,52 +132,53 @@ public class QuoteServiceImpl implements QuoteService {
         IexQuote iexQuote = marketDataRepo.findIexQuoteByTicker(ticker);
         return convertIexQuote(iexQuote);
     }
-    private IexQuoteResponse convertIexQuote(IexQuote model){
+
+    private IexQuoteResponse convertIexQuote(IexQuote model) {
         return IexQuoteResponse.builder()
                 .avgTotalVolume(model.getAvgTotalVolume())
-        .calculationPrice(model.getCalculationPrice())
-        .change(model.getChange())
-        .changePercent(model.getChangePercent())
-        .close(model.getClose())
-     .closeTime(model.getCloseTime())
-        .companyName(model.getCompanyName())
-        .delayedPrice(model.getDelayedPrice())
-        .delayedPriceTime(model.getDelayedPriceTime())
-        .extendedChange(model.getExtendedChange())
-        .extendedChangePercent(model.getExtendedChangePercent())
-        .extendedPrice(model.getExtendedPrice())
-        .extendedPriceTime(model.getExtendedPriceTime())
-        .high(model.getHigh())
-        .iexAskPrice(model.getIexAskPrice())
-        .iexAskSize(model.getIexAskSize())
-        .iexBidPrice(model.getIexBidPrice())
-        .iexBidSize(model.getIexBidSize())
-        .iexLastUpdated(model.getIexLastUpdated())
-        .iexMarketPercent(model.getIexMarketPercent())
-        .iexRealtimePrice(model.getIexRealtimePrice())
-        .iexRealtimeSize(model.getIexRealtimeSize())
-        .iexVolume(model.getIexVolume())
-        .latestPrice(model.getLatestPrice())
-        .latestSource(model.getLatestSource())
-        .latestTime(model.getLatestTime())
-        .latestUpdate(model.getLatestUpdate())
-        .latestVolume(model.getLatestVolume())
-        .low(model.getLow())
-        .marketCap(model.getMarketCap())
-        .open(model.getOpen())
-        .openTime(model.getOpenTime())
-        .peRatio(model.getPeRatio())
-        .previousClose(model.getPreviousClose())
-        .primaryExchange(model.getPrimaryExchange())
-        .sector(model.getSector())
-        .symbol(model.getSymbol())
-        .week52High(model.getWeek52High())
-        .week52Low(model.getWeek52Low())
-        .ytdChange(model.getYtdChange())
+                .calculationPrice(model.getCalculationPrice())
+                .change(model.getChange())
+                .changePercent(model.getChangePercent())
+                .close(model.getClose())
+                .closeTime(model.getCloseTime())
+                .companyName(model.getCompanyName())
+                .delayedPrice(model.getDelayedPrice())
+                .delayedPriceTime(model.getDelayedPriceTime())
+                .extendedChange(model.getExtendedChange())
+                .extendedChangePercent(model.getExtendedChangePercent())
+                .extendedPrice(model.getExtendedPrice())
+                .extendedPriceTime(model.getExtendedPriceTime())
+                .high(model.getHigh())
+                .iexAskPrice(model.getIexAskPrice())
+                .iexAskSize(model.getIexAskSize())
+                .iexBidPrice(model.getIexBidPrice())
+                .iexBidSize(model.getIexBidSize())
+                .iexLastUpdated(model.getIexLastUpdated())
+                .iexMarketPercent(model.getIexMarketPercent())
+                .iexRealtimePrice(model.getIexRealtimePrice())
+                .iexRealtimeSize(model.getIexRealtimeSize())
+                .iexVolume(model.getIexVolume())
+                .latestPrice(model.getLatestPrice())
+                .latestSource(model.getLatestSource())
+                .latestTime(model.getLatestTime())
+                .latestUpdate(model.getLatestUpdate())
+                .latestVolume(model.getLatestVolume())
+                .low(model.getLow())
+                .marketCap(model.getMarketCap())
+                .open(model.getOpen())
+                .openTime(model.getOpenTime())
+                .peRatio(model.getPeRatio())
+                .previousClose(model.getPreviousClose())
+                .primaryExchange(model.getPrimaryExchange())
+                .sector(model.getSector())
+                .symbol(model.getSymbol())
+                .week52High(model.getWeek52High())
+                .week52Low(model.getWeek52Low())
+                .ytdChange(model.getYtdChange())
                 .build();
     }
 
-    public List<QuoteResponse> getDailyList(){
+    public List<QuoteResponse> getDailyList() {
         List<Quote> dailyList = quoteRepo.findAll();
         List<QuoteResponse> quoteResponseList = new ArrayList<>();
         dailyList.stream().forEach(quote -> {
@@ -187,7 +188,7 @@ public class QuoteServiceImpl implements QuoteService {
         return quoteResponseList;
     }
 
-    public QuoteResponse update(Quote quote){
+    public QuoteResponse update(Quote quote) {
         Quote savedQuote = quoteRepo.save(quote);
         return convertQuote(savedQuote);
     }

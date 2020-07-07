@@ -34,7 +34,7 @@ public class MarketDataRepository {
     private HttpClientConnectionManager httpClientConnectionManager;
 
     @Autowired
-    public MarketDataRepository(@Value("${app.host") String host, @Value("${app.token}") String token) {
+    public MarketDataRepository(@Value("${app.host}") String host, @Value("${app.token}") String token) {
         BATCH_QUOTE_URL = host + "/stock/market/batch?symbols=%s&types=quote&token="
                 + token;
     }
