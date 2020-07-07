@@ -23,9 +23,9 @@ public class AppController {
      *
      * @return String http response
      */
-    @GetMapping(path = "/health", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(path = "/health")
     @ApiOperation(value = "Test if the trading app is successfully running", notes = "Test if the trading app is successfully running.",
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE, response = String.class)
+           response = String.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Request completes sucessfully."),
             @ApiResponse(code = 404, message = "Not found."),
