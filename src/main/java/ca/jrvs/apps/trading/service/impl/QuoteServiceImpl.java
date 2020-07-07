@@ -189,6 +189,9 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     public QuoteResponse update(Quote quote) {
+        if (!quoteRepo.existsById(quote.getTicker())) {
+            throw new ResourceNotFoundException("Ticker not found:" + quote.getTicker());
+        }
         Quote savedQuote = quoteRepo.save(quote);
         return convertQuote(savedQuote);
     }
