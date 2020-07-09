@@ -51,7 +51,7 @@ public class TraderController {
             @ApiResponse(code = 404, message = "Not found."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
-    public ResponseEntity<?> createTrader(
+    public ResponseEntity<?> createTraderAndAccount(
             @ApiParam(value = "Trader Request", format = "yyyy-MM-dd")
             @RequestBody TraderRequest req) {
         try {
