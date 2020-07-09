@@ -7,6 +7,7 @@ import ca.jrvs.apps.trading.repositoris.models.domain.IexQuote;
 import ca.jrvs.apps.trading.repositoris.models.domain.Quote;
 import ca.jrvs.apps.trading.service.QuoteService;
 import ca.jrvs.apps.trading.web.resources.IexQuoteResponse;
+import ca.jrvs.apps.trading.web.resources.QuoteRequest;
 import ca.jrvs.apps.trading.web.resources.QuoteResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class QuoteServiceImpl implements QuoteService {
      * Note: `iexQuote.getLatestPrice() == null` if the stock market is closed.
      * Make sure set a default value for number field(s).
      */
-    public static Quote convertQuoteFromIexQuote(IexQuote iexQuote) {
+    private static Quote convertQuoteFromIexQuote(IexQuote iexQuote) {
         Quote quote = Quote.builder()
                 .ticker(iexQuote.getSymbol())
                 .lastPrice(Double.parseDouble(Optional.ofNullable(iexQuote.getLatestPrice()).orElse("0")))
@@ -188,10 +189,18 @@ public class QuoteServiceImpl implements QuoteService {
         return quoteResponseList;
     }
 
-    public QuoteResponse update(Quote quote) {
-        if (!quoteRepo.existsById(quote.getTicker())) {
-            throw new ResourceNotFoundException("Ticker not found:" + quote.getTicker());
+    public QuoteResponse update(QuoteRequest req) {
+        if (!quoteRepo.existsById(req.getTicker())) {
+            throw new ResourceNotFoundException("Ticker not found:" + req.getTicker());
         }
+        Quote quote = Quote.builder()
+                .ticker(req.getTicker())
+                .askPrice(req.getAskPrice())
+                .askSize(req.getAskSize())
+                .bidPrice(req.getBidPrice())
+                .bidSize(req.getBidSize())
+                .lastPrice(req.getLastPrice())
+                .build();
         Quote savedQuote = quoteRepo.save(quote);
         return convertQuote(savedQuote);
     }

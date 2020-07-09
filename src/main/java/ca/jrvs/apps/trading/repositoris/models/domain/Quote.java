@@ -25,7 +25,7 @@ public class Quote implements Serializable {
     private static final long serialVersionUID = 1l;
     @Id
     @Column(name = "TICKER")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String ticker;
     @Column(name = "ASK_PRICE", nullable = false)
     private Double askPrice;

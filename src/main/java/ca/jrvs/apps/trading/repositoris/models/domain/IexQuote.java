@@ -2,8 +2,6 @@ package ca.jrvs.apps.trading.repositoris.models.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-
 @Getter
 @Setter
 //@Entity
@@ -53,7 +51,5 @@ public class IexQuote {
     private String week52High;
     private String week52Low;
     private String ytdChange;
-
-
 
 }

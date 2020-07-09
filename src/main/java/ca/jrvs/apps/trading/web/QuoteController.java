@@ -1,11 +1,10 @@
 package ca.jrvs.apps.trading.web;
 
-import ca.jrvs.apps.trading.repositoris.models.domain.IexQuote;
 import ca.jrvs.apps.trading.repositoris.models.domain.Quote;
 import ca.jrvs.apps.trading.service.QuoteService;
 import ca.jrvs.apps.trading.util.ResponseExceptionUtil;
 import ca.jrvs.apps.trading.web.resources.IexQuoteResponse;
-import ca.jrvs.apps.trading.web.resources.PortfolioResponse;
+import ca.jrvs.apps.trading.web.resources.QuoteRequest;
 import ca.jrvs.apps.trading.web.resources.QuoteResponse;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -59,10 +57,10 @@ public class QuoteController {
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
     public ResponseEntity<?> putQuote(
-            @ApiParam(value = "Quote to be updated.")
-            @RequestBody Quote quote) {
+            @ApiParam(value = "Quote request")
+            @RequestBody QuoteRequest req) {
         try {
-            QuoteResponse response = quoteService.update(quote);
+            QuoteResponse response = quoteService.update(req);
             return ResponseEntity
                     .ok()
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -72,10 +70,16 @@ public class QuoteController {
         }
     }
 
+    @PostMapping(path = "/tickerId/{tickerId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Add a ticker to dailyList(quote table)", notes = "Init a new ticker in the dailyList")
-    @PostMapping(path = "/tickerId/{tickerId}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createQuote(@PathVariable String tickerId) {
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Request completes successfully."),
+            @ApiResponse(code = 404, message = "Not found."),
+            @ApiResponse(code = 500, message = "Internal Server Error.")
+    })
+    public void createQuote(
+            @ApiParam("Ticker Id")
+            @PathVariable String tickerId) {
         try {
             quoteService.initQuote(tickerId);
         } catch (Exception e) {
@@ -87,7 +91,7 @@ public class QuoteController {
     @ApiOperation(value = "Show the dailyList", notes = "Show dailyList for this trading system",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, responseContainer = "List", response = QuoteResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Request completes sucessfully."),
+            @ApiResponse(code = 200, message = "Request completes successfully."),
             @ApiResponse(code = 404, message = "Not found."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
@@ -107,7 +111,7 @@ public class QuoteController {
     @ApiOperation(value = "Show iexQuote", notes =  "Show iexQuote for a given ticker or symbol",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, response = IexQuoteResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Request completes sucessfully."),
+            @ApiResponse(code = 200, message = "Request completes successfully."),
             @ApiResponse(code = 404, message = "Not found."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })

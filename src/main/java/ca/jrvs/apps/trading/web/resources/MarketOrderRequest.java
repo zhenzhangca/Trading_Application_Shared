@@ -2,7 +2,6 @@ package ca.jrvs.apps.trading.web.resources;
 
 import lombok.*;
 
-import javax.persistence.Entity;
 
 @Getter
 @Setter

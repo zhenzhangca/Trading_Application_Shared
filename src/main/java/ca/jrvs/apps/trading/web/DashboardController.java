@@ -26,7 +26,7 @@ public class DashboardController {
     @ApiOperation(value = "Show portfolio by trader ID", notes = "Show portfolio by trader ID.",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, response = PortfolioResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Request completes sucessfully."),
+            @ApiResponse(code = 200, message = "Request completes successfully."),
             @ApiResponse(code = 404, message = "Not found."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
@@ -48,7 +48,7 @@ public class DashboardController {
     @ApiOperation(value = "Show trader's profile by trader ID", notes = "Show trader's profile by trader ID.",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, response = TraderProfileResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Request completes sucessfully."),
+            @ApiResponse(code = 200, message = "Request completes successfully."),
             @ApiResponse(code = 404, message = "Not found."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })
