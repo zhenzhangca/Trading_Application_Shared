@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
+@Service("QuoteServiceImpl")
 @Slf4j
 public class QuoteServiceImpl implements QuoteService {
     @Autowired

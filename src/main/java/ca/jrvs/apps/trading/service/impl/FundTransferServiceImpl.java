@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("FundTransferServiceImpl")
 @Slf4j
 public class FundTransferServiceImpl implements FundTransferService {
     @Autowired

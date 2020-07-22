@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("RegisterServiceImpl")
 @Slf4j
 public class RegisterServiceImpl implements RegisterService {
     @Autowired
