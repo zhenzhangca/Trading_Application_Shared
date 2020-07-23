@@ -7,16 +7,20 @@ import ca.jrvs.apps.trading.web.resources.AccountResponse;
 import ca.jrvs.apps.trading.web.resources.TraderProfileResponse;
 import ca.jrvs.apps.trading.web.resources.TraderRequest;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "trader", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@Controller
-@RequestMapping("/trader")
+@Validated
+@RestController
+@RequestMapping(value = "/api/v1/trading/trader")
+@Api(value = "trader")
+@Slf4j
 public class TraderController {
     @Autowired
     private FundTransferService fundTransferService;

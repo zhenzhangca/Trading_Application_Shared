@@ -1,25 +1,26 @@
 package ca.jrvs.apps.trading.web;
 
-import ca.jrvs.apps.trading.repositoris.models.domain.Quote;
 import ca.jrvs.apps.trading.service.QuoteService;
 import ca.jrvs.apps.trading.util.ResponseExceptionUtil;
 import ca.jrvs.apps.trading.web.resources.IexQuoteResponse;
 import ca.jrvs.apps.trading.web.resources.QuoteRequest;
 import ca.jrvs.apps.trading.web.resources.QuoteResponse;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@Controller
-@RequestMapping("/quote")
+@Validated
+@RestController
+@RequestMapping(value = "/api/v1/trading/quote")
+@Api(value = "quote")
+@Slf4j
 public class QuoteController {
     @Autowired
     private QuoteService quoteService;
