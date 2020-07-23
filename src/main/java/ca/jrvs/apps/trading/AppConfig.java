@@ -1,7 +1,6 @@
 package ca.jrvs.apps.trading;
 
 import ca.jrvs.apps.trading.repositoris.models.config.MarketDataConfig;
-import ca.jrvs.apps.trading.util.StringUtil;
 import lombok.*;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -10,12 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import javax.persistence.Entity;
-import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement

@@ -27,7 +27,7 @@ public class AppController {
     @ApiOperation(value = "Test if the trading app is successfully running", notes = "Test if the trading app is successfully running.",
            response = String.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Request completes sucessfully."),
+            @ApiResponse(code = 200, message = "Request completes successfully."),
             @ApiResponse(code = 404, message = "Not found."),
             @ApiResponse(code = 500, message = "Internal Server Error.")
     })

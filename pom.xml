@@ -11,7 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ca.jrvs.apps</groupId>
-    <artifactId>Trading_Application_Interaction</artifactId>
+    <artifactId>Trading_Application_Shared</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
