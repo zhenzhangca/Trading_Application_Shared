@@ -22,7 +22,7 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <mockito.version>3.2.4</mockito.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
-        <mysql.version>8.0.17</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
     </properties>
 
     <dependencies>
